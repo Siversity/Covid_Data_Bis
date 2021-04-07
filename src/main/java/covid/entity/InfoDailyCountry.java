@@ -1,0 +1,40 @@
+package covid.entity;
+import java.time.LocalDate;
+import javax.persistence.*;
+import lombok.*;
+
+// Un exemple d'entité
+// On utilise Lombok pour auto-générer getter / setter / toString...
+// cf. https://examples.javacodegeeks.com/spring-boot-with-lombok/
+@Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
+@Entity // Une entité JPA
+public class InfoDailyCountry {
+    
+    // Attributs
+    @Id  @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Integer idInfoCountry;
+    
+    @Column
+    @NonNull
+    private LocalDate date;
+    
+    @Column
+    private Integer newCases;
+    
+    @Column
+    private Integer newDeaths;
+    
+    @Column
+    private Integer positiveRate;
+    
+    @Column
+    private Integer newTests;
+    
+    @Column
+    private Integer newVaccinations;
+    
+    // Relations
+    @ManyToOne
+    private Country countryInformed;
+
+}
