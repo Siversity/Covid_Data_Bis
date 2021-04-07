@@ -5,6 +5,6 @@ import covid.entity.Region;
 
 // This will be AUTO IMPLEMENTED by Spring
 
-public interface AreaRepository extends JpaRepository<Region, Integer>{
+public interface RegionRepository extends JpaRepository<Region, Integer>{
     
 }
