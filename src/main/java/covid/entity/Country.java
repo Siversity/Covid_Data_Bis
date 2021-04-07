@@ -12,9 +12,11 @@ import lombok.*;
 public class Country {
     
     // Attributs
-    @Id  @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    private Integer idCountry;
-
+    @Column (unique=true)
+    @NonNull
+    @Id
+    private String codeCountry;
+    
     @Column(unique=true)
     @NonNull
     private String nameCountry;
@@ -41,7 +43,7 @@ public class Country {
     private Integer fullyVaccineted;
     
     @Column
-    private Integer StringencyIndex;
+    private Integer stringencyIndex;
     
     @Column
     private float population;
@@ -52,12 +54,12 @@ public class Country {
     // Relations
     @ManyToOne
     @NonNull
-    private Continent zone;
+    private Continent continent;
     
-    @OneToMany(mappedBy = "countryArea")
-    private List<Area> listeArea = new LinkedList<>();
+    @OneToMany(mappedBy = "paysFr")
+    private List<Region> regionsFr = new LinkedList<>();
     
     @OneToMany(mappedBy = "countryInformed")
-    private List<InfoDailyCountry> listInfoDailyCountry = new LinkedList<>();
+    private List<InfoDailyCountry> infos = new LinkedList<>();
     
 }

@@ -1,5 +1,6 @@
 package covid.entity;
 import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.*;
 import lombok.*;
 
@@ -16,7 +17,7 @@ public class InfoDailyCountry {
     
     @Column
     @NonNull
-    private LocalDate date;
+    private Date date;
     
     @Column
     private Integer newCases;
@@ -35,6 +36,7 @@ public class InfoDailyCountry {
     
     // Relations
     @ManyToOne
+    @NonNull
     private Country countryInformed;
 
 }

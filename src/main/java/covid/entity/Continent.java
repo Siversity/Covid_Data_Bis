@@ -21,6 +21,6 @@ public class Continent {
     
     
     // Relations
-    @OneToMany(mappedBy = "zone")
-    List<Country> listePays = new LinkedList<>();
+    @OneToMany(mappedBy = "continent")
+    List<Country> countries = new LinkedList<>();
 }

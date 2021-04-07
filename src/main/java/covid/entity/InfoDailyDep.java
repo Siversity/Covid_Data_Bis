@@ -1,5 +1,6 @@
 package covid.entity;
 import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.*;
 import lombok.*;
 
@@ -8,7 +9,7 @@ import lombok.*;
 // cf. https://examples.javacodegeeks.com/spring-boot-with-lombok/
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
 @Entity // Une entité JPA
-public class InfoDailyDepartment {
+public class InfoDailyDep {
     
     // Attributs
     @Id  @GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -16,22 +17,22 @@ public class InfoDailyDepartment {
     
     @Column
     @NonNull
-    private LocalDate date;
+    private Date date;
     
     @Column
-    private Integer nbrHospitalized;
+    private Integer nbrHosp;
     
     @Column
-    private Integer newReanimation;
+    private Integer nbrRea;
     
     @Column
-    private Integer newCured;
+    private Integer nbrRad;
     
     @Column
-    private Integer cumuledDeaths;
+    private Integer nbrDC;
     
     // Relations
     @ManyToOne
-    private Department departmentInformed;
+    private Departement departmentInformed;
     
 }
