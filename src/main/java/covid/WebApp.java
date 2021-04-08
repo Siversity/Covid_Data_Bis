@@ -1,6 +1,8 @@
 package covid;
 
 import au.com.bytecode.opencsv.CSVReader;
+import covid.dao.CountryRepository;
+import covid.entity.Country;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -14,6 +16,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -27,8 +33,11 @@ public class WebApp {
         Timer timer = new Timer();
         TimerTask dailyTask = new TimerTask() {
             // On télécharge le fichier toutes les 24h
+            private CountryRepository countryDAO;
+
             @Override
             public void run() {
+
                 // Code
                 try {
                     // Téléchargement et stockage du fichier OWD
@@ -63,8 +72,15 @@ public class WebApp {
 
                     // Stockage des données du fichier OWD
                     for (String[] oneData : dataOWD) {
+
                         String codeCountry = oneData[0];
                         System.out.println(codeCountry);
+
+                        Country country = new Country();
+                        country.setCodeCountry(codeCountry);
+
+                        countryDAO.save(country);
+
                     }
 
                 } catch (Exception ex) {

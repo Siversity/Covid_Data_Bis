@@ -5,6 +5,6 @@ import covid.entity.Country;
 
 // This will be AUTO IMPLEMENTED by Spring 
 
-public interface CountryRepository extends JpaRepository<Country, Integer> {
+public interface CountryRepository extends JpaRepository<Country, String> {
     
 }
