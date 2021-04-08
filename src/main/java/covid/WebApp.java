@@ -62,12 +62,9 @@ public class WebApp {
                     }
 
                     // Stockage des données du fichier OWD
-                    List<String> eleves = new ArrayList<String>();
-
                     for (String[] oneData : dataOWD) {
                         String codeCountry = oneData[0];
                         System.out.println(codeCountry);
-
                     }
 
                 } catch (Exception ex) {
