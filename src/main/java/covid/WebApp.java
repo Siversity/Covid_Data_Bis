@@ -41,7 +41,7 @@ public class WebApp {
                     // Traitement du fichier OWD
                     File fileOWD = new File("dataOWD.csv");
                     FileReader frOWD = new FileReader(fileOWD);
-                    CSVReader csvrOWD = new CSVReader(frOWD, ';');
+                    CSVReader csvrOWD = new CSVReader(frOWD, ',');
 
                     // Lecture du fichier OWD
                     List<String[]> dataOWD = new ArrayList<String[]>();
@@ -61,6 +61,14 @@ public class WebApp {
                         dataOWD.add(nextLine);
                     }
 
+                    // Stockage des données du fichier OWD
+                    List<String> eleves = new ArrayList<String>();
+
+                    for (String[] oneData : dataOWD) {
+                        String codeCountry = oneData[0];
+                        System.out.println(codeCountry);
+
+                    }
 
                 } catch (Exception ex) {
                     Logger.getLogger(WebApp.class.getName()).log(Level.SEVERE, null, ex);
