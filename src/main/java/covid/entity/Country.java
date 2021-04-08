@@ -22,34 +22,34 @@ public class Country {
     private String nameCountry;
     
     @Column
-    private Integer totalCases;
+    private float totalCases;
     
     @Column
-    private Integer totalDeaths;
+    private float totalDeaths;
     
     @Column
-    private Integer icuPatients;
+    private float icuPatients;
     
     @Column
-    private Integer hospPatients;
+    private float hospPatients;
     
     @Column
-    private Integer totalTest;
+    private float totalTests;
     
     @Column
-    private Integer totalVaccinations;
+    private float totalVaccinations;
     
     @Column
-    private Integer fullyVaccineted;
+    private float fullyVaccineted;
     
     @Column
-    private Integer stringencyIndex;
+    private float stringencyIndex;
     
     @Column
     private float population;
     
     @Column
-    private Integer gdp;
+    private float gdp;
     
     // Relations
     @ManyToOne
