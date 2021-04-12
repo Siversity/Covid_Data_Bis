@@ -24,7 +24,7 @@ public class Downloading {
     @Autowired
     private CountryRepository countryDAO;
 
-    // Méthode de téléchargement OWD
+    // Méthode timer
     public void runTimer() {
         // Timer
         Timer timer = new Timer();
@@ -32,31 +32,41 @@ public class Downloading {
             // On télécharge le fichier toutes les 24h
             @Override
             public void run() {
+                // On fait appel à la méthode downloadFile(String url) créée plus bas
             downloadFile("https://covid.ourworldindata.org/data/owid-covid-data.csv");
             }
         };
-        // Timer de 24h
+        // Timer qui lance la fonction run() toutes les 60*60 millisecondes
         timer.schedule(dailyTask, 01, 60 * 60);
     }
 
+    // Méthode téléchargement
     public void downloadFile(String url) {
         // Code
         try {
             // Téléchargement et stockage du fichier OWD
+            // On crée un lien direct entre l'url et notre instance
             ReadableByteChannel readChannel = Channels.newChannel(new URL(url).openStream());
+            // On crée un chemin nommé "dataOWD.csv"
             FileOutputStream fileOS = new FileOutputStream("dataOWD.csv");
+            // On stocke les données téléchargées dans le chemin
             FileChannel writeChannel = fileOS.getChannel();
             writeChannel
                     .transferFrom(readChannel, 0, Long.MAX_VALUE);
 
             // Traitement du fichier OWD
+            // On transforme le chemin en fichier csv
             File fileOWD = new File("dataOWD.csv");
+            // On crée une instance de lecture pour lire le csv
             FileReader frOWD = new FileReader(fileOWD);
+            // On définit le séparateur (pour le csv : ",")
             CSVReader csvrOWD = new CSVReader(frOWD, ',');
 
             // Lecture du fichier OWD
+            // On initialise un tableau et une variable vide qui va contenir les élements lus par le Reader
             List<String[]> dataOWD = new ArrayList<String[]>();
             String[] nextLine = null;
+            // Si la ligne lue n'est pas vide
             while ((nextLine = csvrOWD.readNext()) != null) {
                 int size = nextLine.length;
                 if (size == 0) {
@@ -72,6 +82,7 @@ public class Downloading {
                 dataOWD.add(nextLine);
             }
             
+            // On supprime la 1ère ligne qui correspond au no des attributs
             dataOWD.remove(0);
 
             // Stockage des données du fichier OWD
@@ -114,7 +125,7 @@ public class Downloading {
                 float gdp = Float.valueOf(stringGdp);
 */
                 
-                // Intégration des attributs Country
+                // Définition des attributs Country
                 Country country = new Country();
                 country.setCodeCountry(codeCountry);
                 country.setNameCountry(nameCountry);
@@ -130,7 +141,7 @@ public class Downloading {
                 country.setPopulation(population);
                 country.setGdp(gdp);
 */
-                
+                // Sauvegarde dans la BDD
                 countryDAO.save(country);
 
             }
