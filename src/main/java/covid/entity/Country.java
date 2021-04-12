@@ -21,6 +21,7 @@ public class Country {
     @NonNull
     private String nameCountry;
     
+    /*
     @Column
     private float totalCases;
     
@@ -50,7 +51,10 @@ public class Country {
     
     @Column
     private float gdp;
-    
+
+    */
+
+    /*
     // Relations
     @ManyToOne
     @NonNull
@@ -61,5 +65,5 @@ public class Country {
     
     @OneToMany(mappedBy = "countryInformed")
     private List<InfoDailyCountry> infos = new LinkedList<>();
-    
+    */
 }

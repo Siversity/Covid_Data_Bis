@@ -1,5 +1,6 @@
 package covid;
 
+import covid.task.SchedulingTasksApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,9 +9,7 @@ public class WebApp {
     
     public static void main(String[] args) {
         SpringApplication.run(WebApp.class, args);
-        
-        Downloading dlOWD = new Downloading();
-        dlOWD.runTimer();
-        
+        System.out.println("Initilized");
+        SpringApplication.run(SchedulingTasksApplication.class);
     }
 }

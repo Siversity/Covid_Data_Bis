@@ -19,8 +19,9 @@ public class Continent {
     @NonNull
     private String nameContinent;
     
-    
+    /*
     // Relations
     @OneToMany(mappedBy = "continent")
     List<Country> countries = new LinkedList<>();
+*/
 }

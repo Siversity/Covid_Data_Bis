@@ -34,9 +34,10 @@ public class InfoDailyCountry {
     @Column
     private Integer newVaccinations;
     
+    /*
     // Relations
     @ManyToOne
     @NonNull
     private Country countryInformed;
-
+    */
 }
