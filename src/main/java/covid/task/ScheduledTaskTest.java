@@ -15,6 +15,7 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -184,9 +185,12 @@ public class ScheduledTaskTest {
     }
     
     // Sauvegarde InfoDailyCountry
-    public InfoDailyCountry saveInfoDailyCountry(String[] oneData, CountryRepository countryDAO) {
+    public InfoDailyCountry saveInfoDailyCountry(String[] oneData, CountryRepository countryDAO) throws ParseException {
         // Récupération des données
+       
        // Date date = oneData[3];
+        String datestr = oneData[3];
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse(datestr);
         float newCases = verificateur(oneData[5]);
         float newDeaths= verificateur(oneData[8]);
         float positiveRate= verificateur(oneData[31]);
@@ -196,7 +200,7 @@ public class ScheduledTaskTest {
 
         // Ajout des données
         InfoDailyCountry infoDailyCountry = new InfoDailyCountry();
-       // infoDailyCountry.setDate(date);
+        infoDailyCountry.setDate(date);
         infoDailyCountry.setNewCases(newCases);
         infoDailyCountry.setNewDeaths(newDeaths);
         infoDailyCountry.setPositiveRate(positiveRate);
