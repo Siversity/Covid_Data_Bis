@@ -7,6 +7,7 @@ import covid.dao.CountryRepository;
 import covid.dao.InfoDailyCountryRepository;
 import covid.entity.Continent;
 import covid.entity.Country;
+import covid.entity.InfoDailyCountry;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -180,5 +181,30 @@ public class ScheduledTaskTest {
 
         // Return
         return country;
+    }
+    
+    // Sauvegarde InfoDailyCountry
+    public InfoDailyCountry saveInfoDailyCountry(String[] oneData, CountryRepository countryDAO) {
+        // Récupération des données
+       // Date date = oneData[3];
+        float newCases = verificateur(oneData[5]);
+        float newDeaths= verificateur(oneData[8]);
+        float positiveRate= verificateur(oneData[31]);
+        float newTests= verificateur(oneData[25]);
+        float newVaccinations= verificateur(oneData[37]);
+        
+
+        // Ajout des données
+        InfoDailyCountry infoDailyCountry = new InfoDailyCountry();
+       // infoDailyCountry.setDate(date);
+        infoDailyCountry.setNewCases(newCases);
+        infoDailyCountry.setNewDeaths(newDeaths);
+        infoDailyCountry.setPositiveRate(positiveRate);
+        infoDailyCountry.setNewTests(newTests);
+        infoDailyCountry.setNewVaccinations(newVaccinations);
+        
+
+        // Return
+        return infoDailyCountry;
     }
 }
