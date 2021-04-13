@@ -20,23 +20,24 @@ public class InfoDailyCountry {
     private Date date;
     
     @Column
-    private Integer newCases;
+    private float newCases;
     
     @Column
-    private Integer newDeaths;
+    private float newDeaths;
     
     @Column
-    private Integer positiveRate;
+    private float positiveRate;
     
     @Column
-    private Integer newTests;
+    private float newTests;
     
     @Column
-    private Integer newVaccinations;
+    private float newVaccinations;
+    
     
     // Relations
     @ManyToOne
     @NonNull
     private Country countryInformed;
-
+    
 }

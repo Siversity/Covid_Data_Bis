@@ -17,11 +17,12 @@ public class Region {
     @Id
     private String nomRegion;
     
-    
+    /*
     // Relations
     @ManyToOne
     @NonNull
     private Country paysFr;
+    */
     
     @OneToMany(mappedBy = "region")
     private List<Departement> departements = new LinkedList<>();

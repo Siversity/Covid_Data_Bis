@@ -50,16 +50,18 @@ public class Country {
     
     @Column
     private float gdp;
-    
+
+
     // Relations
     @ManyToOne
     @NonNull
     private Continent continent;
     
+    /*
     @OneToMany(mappedBy = "paysFr")
     private List<Region> regionsFr = new LinkedList<>();
     
     @OneToMany(mappedBy = "countryInformed")
     private List<InfoDailyCountry> infos = new LinkedList<>();
-    
+    */
 }
