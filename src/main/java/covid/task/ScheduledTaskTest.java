@@ -4,6 +4,7 @@ import au.com.bytecode.opencsv.CSVReader;
 import covid.WebApp;
 import covid.dao.ContinentRepository;
 import covid.dao.CountryRepository;
+import covid.dao.InfoDailyCountryRepository;
 import covid.entity.Continent;
 import covid.entity.Country;
 import java.io.File;
@@ -36,11 +37,15 @@ public class ScheduledTaskTest {
     private final ContinentRepository continentDAO;
     @Autowired
     private final CountryRepository countryDAO;
+    @Autowired
+    private final InfoDailyCountryRepository infoDailyCountryRepository;
+    
 
     // Constructeur
-    public ScheduledTaskTest(ContinentRepository continentDAO, CountryRepository countryDAO) {
+    public ScheduledTaskTest(ContinentRepository continentDAO, CountryRepository countryDAO, InfoDailyCountryRepository infoDailyCountryRepository) {
         this.continentDAO = continentDAO;
         this.countryDAO = countryDAO;
+        this.infoDailyCountryRepository = infoDailyCountryRepository;
     }
 
     private static final Logger log = LoggerFactory.getLogger(ScheduledTaskTest.class);
