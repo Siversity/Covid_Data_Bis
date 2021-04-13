@@ -40,14 +40,14 @@ public class ScheduledTaskTest {
     @Autowired
     private final CountryRepository countryDAO;
     @Autowired
-    private final InfoDailyCountryRepository infoDailyCountryRepository;
+    private final InfoDailyCountryRepository infoDailyCountryDAO;
     
 
     // Constructeur
-    public ScheduledTaskTest(ContinentRepository continentDAO, CountryRepository countryDAO, InfoDailyCountryRepository infoDailyCountryRepository) {
+    public ScheduledTaskTest(ContinentRepository continentDAO, CountryRepository countryDAO, InfoDailyCountryRepository infoDailyCountryDAO) {
         this.continentDAO = continentDAO;
         this.countryDAO = countryDAO;
-        this.infoDailyCountryRepository = infoDailyCountryRepository;
+        this.infoDailyCountryDAO = infoDailyCountryDAO;
     }
 
     private static final Logger log = LoggerFactory.getLogger(ScheduledTaskTest.class);
@@ -60,7 +60,7 @@ public class ScheduledTaskTest {
     }
 
     // Méthode téléchargement
-    @Scheduled(cron = "*/10 * * * * *")
+    @Scheduled(fixedRate = 1000*60*60*24)
     public void downloadFile() {
         // Code
         try {
@@ -111,11 +111,21 @@ public class ScheduledTaskTest {
                 // Sauvegarde Continent
                 Continent continent = saveContinent(oneData);
                 continentDAO.save(continent);
+                System.out.println("--> CONTINENT " + continentDAO.findById(continent.getNameContinent()));
+                
                 // Sauvegarde Country
                 Country country = saveCountry(oneData, continentDAO);
+                System.out.println(" --> COUNTRY METHOD " + country);
                 countryDAO.save(country);
+                System.out.println("--> COUNTRY " + countryDAO.findById(country.getCodeCountry()));
+                
+                /*
+                // Sauvegarder InfoDailyCountry
+                InfoDailyCountry infoDailyCountry = saveInfoDailyCountry(oneData);
+                infoDailyCountryDAO.save(infoDailyCountry);
+                */
 
-                System.out.println("SYSTEM OUT " + countryDAO.findById(country.getCodeCountry()));
+                
             }
             System.out.println(countryDAO.findAll());
 
@@ -127,7 +137,7 @@ public class ScheduledTaskTest {
     // Vérificateur donnée
     public float verificateur(String attribute) {
         float value = 0;
-        if ((attribute.isBlank()) && (attribute.equals(null))) {
+        if (!(attribute.isBlank())) {
             value = Float.valueOf(attribute);
         }
         return value;
@@ -187,17 +197,14 @@ public class ScheduledTaskTest {
     // Sauvegarde InfoDailyCountry
     public InfoDailyCountry saveInfoDailyCountry(String[] oneData, CountryRepository countryDAO) throws ParseException {
         // Récupération des données
-       
-       // Date date = oneData[3];
-        String datestr = oneData[3];
-        Date date = new SimpleDateFormat("yyyy-mm-dd").parse(datestr);
+        String stringDate = oneData[3];
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse(stringDate);
         float newCases = verificateur(oneData[5]);
         float newDeaths= verificateur(oneData[8]);
         float positiveRate= verificateur(oneData[31]);
         float newTests= verificateur(oneData[25]);
         float newVaccinations= verificateur(oneData[37]);
         
-
         // Ajout des données
         InfoDailyCountry infoDailyCountry = new InfoDailyCountry();
         infoDailyCountry.setDate(date);
@@ -207,7 +214,6 @@ public class ScheduledTaskTest {
         infoDailyCountry.setNewTests(newTests);
         infoDailyCountry.setNewVaccinations(newVaccinations);
         
-
         // Return
         return infoDailyCountry;
     }

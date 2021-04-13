@@ -18,6 +18,6 @@ public class Continent {
     private String nameContinent;
     
     // Relations
-    @OneToMany(mappedBy = "continent")
-    List<Country> countries = new LinkedList<>();
+    @OneToMany(fetch=FetchType.EAGER, mappedBy = "continent")
+    List<Country> countries = new LinkedList<Country>();
 }

@@ -60,8 +60,8 @@ public class Country {
     /*
     @OneToMany(mappedBy = "paysFr")
     private List<Region> regionsFr = new LinkedList<>();
+*/
     
-    @OneToMany(mappedBy = "countryInformed")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "countryInformed")
     private List<InfoDailyCountry> infos = new LinkedList<>();
-    */
 }
