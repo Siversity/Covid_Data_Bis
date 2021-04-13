@@ -12,8 +12,9 @@ import lombok.*;
 public class Continent {
     
     // Attributs
-    @Id
+    @Column (unique=true)
     @NonNull
+    @Id
     private String nameContinent;
     
     // Relations

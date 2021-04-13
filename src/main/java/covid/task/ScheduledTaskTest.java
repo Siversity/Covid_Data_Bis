@@ -101,12 +101,14 @@ public class ScheduledTaskTest {
             // Stockage des données du fichier OWD
             for (String[] oneData : dataOWD) {
 
+                // Sauvegarde Continent
                 Continent continent = saveContinent(oneData);
-
-                // Sauvegarde dans la BDD
+                continentDAO.save(continent);
+                // Sauvegarde Country
+                Country country = saveCountry(oneData, continentDAO);
                 countryDAO.save(country);
-                System.out.println("SYSTEM OUT " + countryDAO.findById(codeCountry));
 
+                System.out.println("SYSTEM OUT " + countryDAO.findById(country.getCodeCountry()));
             }
             System.out.println(countryDAO.findAll());
 
@@ -115,6 +117,7 @@ public class ScheduledTaskTest {
         }
     }
 
+    // Vérificateur donnée
     public float verificateur(String attribute) {
         float value = 0;
         if ((attribute.isBlank()) && (attribute.equals(null))) {
@@ -123,6 +126,7 @@ public class ScheduledTaskTest {
         return value;
     }
 
+    // Sauvegarde Continent
     public Continent saveContinent(String[] oneData) {
         // Récupération des données
         String nameContinent = oneData[1];
@@ -135,10 +139,11 @@ public class ScheduledTaskTest {
         return continent;
     }
 
-    public Country saveCountry(String[] oneData) {
+    // Sauvegarde Country
+    public Country saveCountry(String[] oneData, ContinentRepository continentDAO) {
         // Récupération des données
         String codeCountry = oneData[0];
-        String nameContinent = oneData[1];
+        Continent continent = continentDAO.findById(oneData[1]).get();
         String nameCountry = oneData[2];
         float totalCases = verificateur(oneData[4]);
         float totalDeaths = verificateur(oneData[7]);
@@ -147,40 +152,28 @@ public class ScheduledTaskTest {
         float totalTests = verificateur(oneData[26]);
         float totalVaccinations = verificateur(oneData[34]);
         float fullyVaccinated = verificateur(oneData[36]);
-        float stringencyIndex = Float.valueOf(stringStringencyIndex);
-        
-        /*
-                
-                // fullyVaccinated
-                String stringFullyVaccinated = oneData[34];
-                
-                // stringencyIndex
-                String stringStringencyIndex = oneData[34];
-                
-                // population
-                String stringPopulation = oneData[34];
-                float population = Float.valueOf(stringPopulation);
-                // gdp
-                String stringGdp = oneData[34];
-                float gdp = Float.valueOf(stringGdp);
-         */
-        // Définition des attributs Country
+        float stringencyIndex = verificateur(oneData[43]);
+        float population = verificateur(oneData[44]);
+        float gdp = verificateur(oneData[49]);
+
+        // Ajout des données
         Country country = new Country();
         country.setCodeCountry(codeCountry);
-        country.setContinent(nameContinent);
+        country.setContinent(continent);
         country.setNameCountry(nameCountry);
         country.setTotalCases(totalCases);
-        /*
-                country.setTotalCases(totalCases);
-                country.setTotalDeaths(totalDeaths);
-                country.setIcuPatients(icuPatients);
-                country.setHospPatients(hospPatients);
-                country.setTotalTests(totalTests);
-                country.setTotalVaccinations(totalVaccinations);
-                country.setFullyVaccineted(fullyVaccinated);
-                country.setStringencyIndex(stringencyIndex);
-                country.setPopulation(population);
-                country.setGdp(gdp);
-         */
+        country.setTotalCases(totalCases);
+        country.setTotalDeaths(totalDeaths);
+        country.setIcuPatients(icuPatients);
+        country.setHospPatients(hospPatients);
+        country.setTotalTests(totalTests);
+        country.setTotalVaccinations(totalVaccinations);
+        country.setFullyVaccineted(fullyVaccinated);
+        country.setStringencyIndex(stringencyIndex);
+        country.setPopulation(population);
+        country.setGdp(gdp);
+
+        // Return
+        return country;
     }
 }

@@ -21,11 +21,9 @@ public class Country {
     @NonNull
     private String nameCountry;
     
-    
     @Column
     private float totalCases;
     
-    /*
     @Column
     private float totalDeaths;
     
@@ -53,7 +51,6 @@ public class Country {
     @Column
     private float gdp;
 
-    */
 
     // Relations
     @ManyToOne
