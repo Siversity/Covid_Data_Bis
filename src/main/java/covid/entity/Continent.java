@@ -12,16 +12,11 @@ import lombok.*;
 public class Continent {
     
     // Attributs
-    @Id  @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    private Integer idContinent;
-
-    @Column(unique=true)
+    @Id
     @NonNull
     private String nameContinent;
     
-    /*
     // Relations
     @OneToMany(mappedBy = "continent")
     List<Country> countries = new LinkedList<>();
-*/
 }

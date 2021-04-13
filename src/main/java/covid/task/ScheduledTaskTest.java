@@ -2,7 +2,9 @@ package covid.task;
 
 import au.com.bytecode.opencsv.CSVReader;
 import covid.WebApp;
+import covid.dao.ContinentRepository;
 import covid.dao.CountryRepository;
+import covid.entity.Continent;
 import covid.entity.Country;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,10 +33,13 @@ public class ScheduledTaskTest {
 
     // DAO
     @Autowired
+    private final ContinentRepository continentDAO;
+    @Autowired
     private final CountryRepository countryDAO;
 
     // Constructeur
-    public ScheduledTaskTest(CountryRepository countryDAO) {
+    public ScheduledTaskTest(ContinentRepository continentDAO, CountryRepository countryDAO) {
+        this.continentDAO = continentDAO;
         this.countryDAO = countryDAO;
     }
 
@@ -48,7 +53,7 @@ public class ScheduledTaskTest {
     }
 
     // Méthode téléchargement
-    @Scheduled(cron="*/10 * * * * *")
+    @Scheduled(cron = "*/10 * * * * *")
     public void downloadFile() {
         // Code
         try {
@@ -96,47 +101,76 @@ public class ScheduledTaskTest {
             // Stockage des données du fichier OWD
             for (String[] oneData : dataOWD) {
 
-                // Collecte des attributs Country
-                String codeCountry = oneData[0];
-                String nameCountry = oneData[2];
+                Continent continent = saveContinent(oneData);
 
-                /*
-                // totalCases
-                String stringTotalCases = oneData[4];
-                float totalCases = Float.valueOf(stringTotalCases);
-                // totalDeaths
-                String stringTotalDeaths = oneData[7];
-                float totalDeaths = Float.valueOf(stringTotalDeaths);
-                // icuPatients
-                String stringIcuPatients = oneData[17];
-                float icuPatients = Float.valueOf(stringIcuPatients);
-                // hospPatients
-                String sringHospPatients = oneData[19];
-                float hospPatients = Float.valueOf(sringHospPatients);
-                // totalTests
-                String stringTotalTests = oneData[26];
-                float totalTests = Float.valueOf(stringTotalTests);
-                // totalVaccinations
-                String stringTotalVaccinations = oneData[34];
-                float totalVaccinations = Float.valueOf(stringTotalVaccinations);
+                // Sauvegarde dans la BDD
+                countryDAO.save(country);
+                System.out.println("SYSTEM OUT " + countryDAO.findById(codeCountry));
+
+            }
+            System.out.println(countryDAO.findAll());
+
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(WebApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public float verificateur(String attribute) {
+        float value = 0;
+        if ((attribute.isBlank()) && (attribute.equals(null))) {
+            value = Float.valueOf(attribute);
+        }
+        return value;
+    }
+
+    public Continent saveContinent(String[] oneData) {
+        // Récupération des données
+        String nameContinent = oneData[1];
+
+        // Ajout des données
+        Continent continent = new Continent();
+        continent.setNameContinent(nameContinent);
+
+        // Return
+        return continent;
+    }
+
+    public Country saveCountry(String[] oneData) {
+        // Récupération des données
+        String codeCountry = oneData[0];
+        String nameContinent = oneData[1];
+        String nameCountry = oneData[2];
+        float totalCases = verificateur(oneData[4]);
+        float totalDeaths = verificateur(oneData[7]);
+        float icuPatients = verificateur(oneData[17]);
+        float hospPatients = verificateur(oneData[19]);
+        float totalTests = verificateur(oneData[26]);
+        float totalVaccinations = verificateur(oneData[34]);
+        float fullyVaccinated = verificateur(oneData[36]);
+        float stringencyIndex = Float.valueOf(stringStringencyIndex);
+        
+        /*
+                
                 // fullyVaccinated
                 String stringFullyVaccinated = oneData[34];
-                float fullyVaccinated = Float.valueOf(stringFullyVaccinated);
+                
                 // stringencyIndex
                 String stringStringencyIndex = oneData[34];
-                float stringencyIndex = Float.valueOf(stringStringencyIndex);
+                
                 // population
                 String stringPopulation = oneData[34];
                 float population = Float.valueOf(stringPopulation);
                 // gdp
                 String stringGdp = oneData[34];
                 float gdp = Float.valueOf(stringGdp);
-                 */
-                // Définition des attributs Country
-                Country country = new Country();
-                country.setCodeCountry(codeCountry);
-                country.setNameCountry(nameCountry);
-                /*
+         */
+        // Définition des attributs Country
+        Country country = new Country();
+        country.setCodeCountry(codeCountry);
+        country.setContinent(nameContinent);
+        country.setNameCountry(nameCountry);
+        country.setTotalCases(totalCases);
+        /*
                 country.setTotalCases(totalCases);
                 country.setTotalDeaths(totalDeaths);
                 country.setIcuPatients(icuPatients);
@@ -147,15 +181,6 @@ public class ScheduledTaskTest {
                 country.setStringencyIndex(stringencyIndex);
                 country.setPopulation(population);
                 country.setGdp(gdp);
-                 */
-                // Sauvegarde dans la BDD
-                countryDAO.save(country);
-                System.out.println("SYSTEM OUT " + countryDAO.findById(codeCountry));
-
-            }
-
-        } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(WebApp.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         */
     }
 }
