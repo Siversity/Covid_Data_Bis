@@ -20,4 +20,9 @@ public class Continent {
     // Relations
     @OneToMany(fetch=FetchType.EAGER, mappedBy = "continent")
     List<Country> countries = new LinkedList<Country>();
+    
+    // Ajout de Country
+    public void addCountry(Country country) {
+        this.countries.add(country);
+    }
 }

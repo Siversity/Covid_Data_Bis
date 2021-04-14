@@ -21,10 +21,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -110,14 +113,15 @@ public class ScheduledTaskTest {
 
                 // Sauvegarde Continent
                 Continent continent = saveContinent(oneData);
-                continentDAO.save(continent);
-                System.out.println("--> CONTINENT " + continentDAO.findById(continent.getNameContinent()));
                 
                 // Sauvegarde Country
-                Country country = saveCountry(oneData, continentDAO);
-                System.out.println(" --> COUNTRY METHOD " + country);
+                Country country = saveCountry(oneData, continent);
+                
+                
+                
+                // DAO
+                continentDAO.save(continent);
                 countryDAO.save(country);
-                System.out.println("--> COUNTRY " + countryDAO.findById(country.getCodeCountry()));
                 
                 /*
                 // Sauvegarder InfoDailyCountry
@@ -142,6 +146,11 @@ public class ScheduledTaskTest {
         }
         return value;
     }
+    
+    public void linkContinentCountry(Continent continent, Country country) {
+        continent.getCountries().add(country);
+        country.setContinent(continent);
+    }
 
     // Sauvegarde Continent
     public Continent saveContinent(String[] oneData) {
@@ -157,10 +166,9 @@ public class ScheduledTaskTest {
     }
 
     // Sauvegarde Country
-    public Country saveCountry(String[] oneData, ContinentRepository continentDAO) {
+    public Country saveCountry(String[] oneData, Continent continent) {
         // Récupération des données
         String codeCountry = oneData[0];
-        Continent continent = continentDAO.findById(oneData[1]).get();
         String nameCountry = oneData[2];
         float totalCases = verificateur(oneData[4]);
         float totalDeaths = verificateur(oneData[7]);
@@ -176,7 +184,6 @@ public class ScheduledTaskTest {
         // Ajout des données
         Country country = new Country();
         country.setCodeCountry(codeCountry);
-        country.setContinent(continent);
         country.setNameCountry(nameCountry);
         country.setTotalCases(totalCases);
         country.setTotalCases(totalCases);
