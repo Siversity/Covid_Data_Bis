@@ -21,13 +21,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -52,17 +49,24 @@ public class ScheduledTaskTest {
         this.countryDAO = countryDAO;
         this.infoDailyCountryDAO = infoDailyCountryDAO;
     }
+    
+    //////////////////////////////////////////////////////////////////////////////////////
+    // Test
+    //////////////////////////////////////////////////////////////////////////////////////
 
     private static final Logger log = LoggerFactory.getLogger(ScheduledTaskTest.class);
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    // Méthode test
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
         log.info("The time is now {}", dateFormat.format(new Date()));
     }
 
-    // Méthode téléchargement
+    //////////////////////////////////////////////////////////////////////////////////////
+    // Téléchargements
+    //////////////////////////////////////////////////////////////////////////////////////
+    
+    // Téléchargement fichier OWD
     @Scheduled(fixedRate = 1000*60*60*24)
     public void downloadFile() {
         // Code
@@ -111,17 +115,17 @@ public class ScheduledTaskTest {
             // Stockage des données du fichier OWD
             for (String[] oneData : dataOWD) {
 
-                // Sauvegarde Continent
-                Continent continent = saveContinent(oneData);
-                
-                // Sauvegarde Country
-                Country country = saveCountry(oneData, continent);
-                
+                // Création des entités
+                Continent newContinent = saveContinent(oneData);
+                Country newCountry = saveCountry(oneData);
+                InfoDailyCountry newInfoDaily = saveInfoDailyCountry(oneData);
                 
                 
-                // DAO
-                continentDAO.save(continent);
-                countryDAO.save(country);
+                
+                // Sauvegarde dans la BDD
+                continentDAO.save(newContinent);
+                countryDAO.save(newCountry);
+                infoDailyCountryDAO.save(newInfoDaily);
                 
                 /*
                 // Sauvegarder InfoDailyCountry
@@ -147,10 +151,25 @@ public class ScheduledTaskTest {
         return value;
     }
     
+    //////////////////////////////////////////////////////////////////////////////////////
+    // Liants
+    //////////////////////////////////////////////////////////////////////////////////////
+    
+    // Liant Continent - Country
     public void linkContinentCountry(Continent continent, Country country) {
         continent.getCountries().add(country);
         country.setContinent(continent);
     }
+    
+    // Liant Country - InfoDailyCountry
+    public void linkCountryInfoDailyCountry(Country country, InfoDailyCountry infoDailyCountry) {
+        country.getInfos().add(infoDailyCountry);
+        infoDailyCountry.setCountryInformed(country);
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////////////
+    // Sauvegardes
+    //////////////////////////////////////////////////////////////////////////////////////
 
     // Sauvegarde Continent
     public Continent saveContinent(String[] oneData) {
@@ -166,7 +185,7 @@ public class ScheduledTaskTest {
     }
 
     // Sauvegarde Country
-    public Country saveCountry(String[] oneData, Continent continent) {
+    public Country saveCountry(String[] oneData) {
         // Récupération des données
         String codeCountry = oneData[0];
         String nameCountry = oneData[2];
@@ -202,10 +221,9 @@ public class ScheduledTaskTest {
     }
     
     // Sauvegarde InfoDailyCountry
-    public InfoDailyCountry saveInfoDailyCountry(String[] oneData, CountryRepository countryDAO) throws ParseException {
+    public InfoDailyCountry saveInfoDailyCountry(String[] oneData) throws ParseException {
         // Récupération des données
-        String stringDate = oneData[3];
-        Date date = new SimpleDateFormat("yyyy-mm-dd").parse(stringDate);
+        Date date = new SimpleDateFormat("yyyy-mm-dd").parse(oneData[3]);
         float newCases = verificateur(oneData[5]);
         float newDeaths= verificateur(oneData[8]);
         float positiveRate= verificateur(oneData[31]);
