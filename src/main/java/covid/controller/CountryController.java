@@ -22,24 +22,7 @@ public class CountryController {
     @Autowired
     private ContinentRepository continentDAO;
     
-    @GetMapping(path="show")
-    public String afficheTousCountries(Model model){
-        
-        // On créé une liste vide qui va acceuillir la liste des pays situés en Europe
-        List countriesEurope = new LinkedList<Country>();
-        // On sélectionne l'Europe
-        for (Continent continent : continentDAO.findAll()) {    
-        if (continent.getNameContinent() == "Europe") {
-            // On ajoute tous les pays du continent dans notre liste
-            for (Country countryEurope : continent.getCountries()) {
-                countriesEurope.add(countryEurope);
-            }
-        }
-    }
-        // Renvoi des données
-        model.addAttribute("countriesEurope", countryDAO.findAll());
-        return "europe";
-    }
+    
 }
 
 

@@ -1,4 +1,4 @@
-package covid.task;
+package covid;
 
 import au.com.bytecode.opencsv.CSVReader;
 import covid.WebApp;
