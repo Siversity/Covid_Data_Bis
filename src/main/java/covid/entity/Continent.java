@@ -18,11 +18,12 @@ public class Continent {
     private String nameContinent;
     
     // Relations
-    @OneToMany(fetch=FetchType.EAGER, mappedBy = "continent")
+    @OneToMany(fetch=FetchType.EAGER, mappedBy = "continent", cascade = CascadeType.ALL)
     List<Country> countries = new LinkedList<Country>();
     
     // Ajout de Country
     public void addCountry(Country country) {
         this.countries.add(country);
+        country.setContinent(this);
     }
 }

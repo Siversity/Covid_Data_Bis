@@ -1,7 +1,6 @@
 package covid;
 
 import au.com.bytecode.opencsv.CSVReader;
-import covid.WebApp;
 import covid.dao.ContinentRepository;
 import covid.dao.CountryRepository;
 import covid.dao.InfoDailyCountryRepository;
@@ -120,20 +119,15 @@ public class ScheduledTaskTest {
                 Country newCountry = saveCountry(oneData);
                 InfoDailyCountry newInfoDaily = saveInfoDailyCountry(oneData);
                 
-                
-                
+                // Lien entre les entités
+                linkContinentCountry(newContinent, newCountry);
+                linkCountryInfoDailyCountry(newCountry, newInfoDaily);
+                        
                 // Sauvegarde dans la BDD
                 continentDAO.save(newContinent);
                 countryDAO.save(newCountry);
                 infoDailyCountryDAO.save(newInfoDaily);
-                
-                /*
-                // Sauvegarder InfoDailyCountry
-                InfoDailyCountry infoDailyCountry = saveInfoDailyCountry(oneData);
-                infoDailyCountryDAO.save(infoDailyCountry);
-                */
-
-                
+              
             }
             System.out.println(countryDAO.findAll());
 

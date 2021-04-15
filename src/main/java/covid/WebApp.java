@@ -9,10 +9,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class WebApp {
     
     public static void main(String[] args) {
-        /*
-        SpringApplication.run(WebApp.class, args);
-        System.out.println("Initilized");
-*/
         SpringApplication.run(WebApp.class);
     }
 }

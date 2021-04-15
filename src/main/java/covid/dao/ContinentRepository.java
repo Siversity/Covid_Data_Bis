@@ -10,11 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ContinentRepository extends JpaRepository<Continent, String> {
     
-    /*
-    @Query("SELECT * "
-		+ "FROM Continent c "
-		+ "WHERE c.nameContinent = :nameContinent "
-		+ "GROUP BY p.nom ")
-    public List<Country> getCountries(String nameContinent);
-    */
+    
+    
+   
 }
