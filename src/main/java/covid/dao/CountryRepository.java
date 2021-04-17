@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CountryRepository extends JpaRepository<Country, String> {
 
-    @Query(value = "SELECT * FROM Country WHERE Continent = :nameContinent", nativeQuery = true)
-        List<Country> getEuropeanCountries(String nameContinent);
+    @Query(value = "SELECT * FROM Country WHERE Continent_Name_Continent = 'Europe' ", nativeQuery = true)
+    List<Country> getEuropeanCountries();
 
 }
