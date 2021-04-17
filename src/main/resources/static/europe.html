@@ -9,7 +9,7 @@ and open the template in the editor.
         <title>Actu covid en Europe</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <link rel="stylesheet" type="text/css" href="css/styleEurope.css"/>
     <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
     
     
@@ -26,7 +26,7 @@ and open the template in the editor.
         var data = google.visualization.arrayToDataTable([
           ['Country', 'Popularity'],
       //Ne fonctionne pas
-          ['th: text=[[${countries.getNameCountry("FRA")}]]',600],
+          ['France',600],
         ]);
 
       var options = {
@@ -41,7 +41,11 @@ and open the template in the editor.
         
     </head>
     <body>
+        <div id="marge"> </div>
+        
+        <div id="entete">
         <h1>Europe</h1>
+        <div>
         <div id="region_div" style="width: 900px; height: 500px;"></div>
     </body>
 </html>
