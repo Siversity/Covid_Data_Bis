@@ -130,15 +130,7 @@ public class ScheduledTaskTest {
                     continentDAO.save(newContinent);
                     countryDAO.save(newCountry);
                     infoDailyCountryDAO.save(newInfoDaily);
-                    System.out.println("--> REQUETE " + countryDAO.getEuropeanCountries().size());
-                } else {
-                    System.out.println("--> CONTINENT " + oneData[2]);
                 }
-                System.out.println("---> LISTE EUROPE ");
-                for (Country c : countryDAO.getEuropeanCountries()) {
-                    System.out.println(c.getNameCountry());
-                }
-
             }
 
         } catch (Exception ex) {

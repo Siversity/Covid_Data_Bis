@@ -2,26 +2,23 @@ package covid.controller;
 
 import covid.dao.ContinentRepository;
 import covid.dao.CountryRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
-@RequestMapping(path = "/country")
+@Service
+@RequestMapping(path = "/api/country")
 public class CountryController {
-    
+
     @Autowired
     private CountryRepository countryDAO;
-    @Autowired
-    private ContinentRepository continentDAO;
-    
-    @GetMapping(path = "europe")
-    public String showEuropeanCountries(Model model) {
-        model.addAttribute("europeanCountries", countryDAO.getEuropeanCountries());
-        return "europeanCountries";
+
+    @GetMapping(path = "getEuropeanCountries", produces = { MediaType.APPLICATION_JSON_VALUE })
+    public @ResponseBody List<Object> europeanCountries() {
+        return countryDAO.getEuropeanCountries();
     }
 }
-
-
