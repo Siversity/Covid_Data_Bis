@@ -26,7 +26,7 @@ public class Country {
     
     @Column
     private float totalDeaths;
-    
+    /*
     @Column
     private float icuPatients;
     
@@ -51,7 +51,7 @@ public class Country {
     @Column
     private float gdp;
 
-
+*/
     // Relations
     @ManyToOne
     @NonNull

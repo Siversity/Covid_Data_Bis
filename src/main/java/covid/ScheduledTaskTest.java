@@ -58,6 +58,7 @@ public class ScheduledTaskTest {
     public void reportCurrentTime() {
         log.info("The time is now {}", dateFormat.format(new Date()));
     }
+    /*
 
     //////////////////////////////////////////////////////////////////////////////////////
     // Téléchargements
@@ -236,4 +237,5 @@ public class ScheduledTaskTest {
         // Return
         return infoDailyCountry;
     }
+*/
 }

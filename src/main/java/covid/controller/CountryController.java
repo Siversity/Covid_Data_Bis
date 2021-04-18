@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @Service
 @RequestMapping(path = "/api/country")
@@ -17,7 +18,7 @@ public class CountryController {
     @Autowired
     private CountryRepository countryDAO;
 
-    @GetMapping(path = "getEuropeanCountries", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(path = "getEuropeanCountries", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Object> europeanCountries() {
         return countryDAO.getEuropeanCountries();
     }

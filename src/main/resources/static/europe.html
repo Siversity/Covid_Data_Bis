@@ -10,38 +10,46 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/styleEurope.css"/>
-        <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
-
-        <script type='text/javascript' th:inline="javascript">
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
             google.charts.load('current', {
             'packages': ['geochart'],
             // Note: you will need to get a mapsApiKey for your project.
             // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
             'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
             });
-            
+
             google.charts.setOnLoadCallback(doAjax);
-            
+
             function test() {
             var result = [["China", 15.0], ['Germany', 10.0], ['Italy', 20.0], ['Spain', 50.0]];
             drawRegionsMap(result);
             };
-            
+
             function doAjax() {
-                $.ajax({
-                    url: "/api/country/getEuropeanCountries",
-                    dataType: "json",
-                    success: drawRegionsMap,
-                    error: showError
-                });
+            $.ajax({
+            type:"GET",
+            url: "/api/country/getEuropeanCountries",
+            dataType: "json",
+            contentType: "application/json",
+            success: drawRegionsMap,
+            error: showError
+            });
             };
+
+            function showResult(result) {
+            console.log(result);
+            };
+
 
             function drawRegionsMap(result) {
             var headers = [["Pays", "Morts"]];
             headers.push(["France", 30.0]);
             for (let i=0; i<result.length; i++) {
-                headers.push(result[i]);
+            headers.push(result[i]);
             }
             var dataTable = google.visualization.arrayToDataTable(headers);
             var chart = new google.visualization.GeoChart(document.getElementById('region_div'));
@@ -50,7 +58,7 @@ and open the template in the editor.
             };
 
             function showError(xhr, status, message) {
-                alert("Erreur: " + status + " : " + message);
+            alert("Erreur: " + status + " : " + message);
             };
 
         </script>
