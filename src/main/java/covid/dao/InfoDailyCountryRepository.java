@@ -3,7 +3,6 @@ package covid.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import covid.entity.InfoDailyCountry;
 import java.time.LocalDate;
-import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

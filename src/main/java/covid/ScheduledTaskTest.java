@@ -64,13 +64,9 @@ public class ScheduledTaskTest {
     //////////////////////////////////////////////////////////////////////////////////////
     // Téléchargements
     //////////////////////////////////////////////////////////////////////////////////////
-    @Scheduled(initialDelay = 1000, fixedDelay = Long.MAX_VALUE)
-    public void launch() {
-        this.downloadFile();
-    }
 
     // Téléchargement fichier OWD
-    @Scheduled(cron = "0 0 15 * * ?")
+    @Scheduled(initialDelay = 1000, fixedRate = 86400000)
     public void downloadFile() {
         // Code
         try {
@@ -140,16 +136,17 @@ public class ScheduledTaskTest {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate date = LocalDate.parse(oneData[3], formatter);
 
+                    /*
                     InfoDailyCountry newInfoDaily2 = saveInfoDailyCountry(oneData, countryDAO);
                     infoDailyCountryDAO.save(newInfoDaily2);
+*/
 
                     // Ajout de l'infoDaily
-                    if (!(infoDailyCountryDAO.existsById(infoDailyCountryDAO.getIdInfoCountryByCountryInformedCodeCountryAndDate(oneData[0], date)))) {
+                    if ((infoDailyCountryDAO.getIdInfoCountryByCountryInformedCodeCountryAndDate(oneData[0], date) == null)) {
                         InfoDailyCountry newInfoDaily = saveInfoDailyCountry(oneData, countryDAO);
                         infoDailyCountryDAO.save(newInfoDaily);
-
                     } else {
-                        System.out.println("=======================================================================================================================================================================================================================================================================================");
+                        System.out.println("==================================================================================");
                     }
 
                 }
@@ -204,40 +201,18 @@ public class ScheduledTaskTest {
         // Récupération des données
         String codeCountry = oneData[0];
         String nameCountry = oneData[2];
-        /*
-        float totalCases = verificateur(oneData[4]);
-        float totalDeaths = verificateur(oneData[7]);
-        float icuPatients = verificateur(oneData[17]);
-        float hospPatients = verificateur(oneData[19]);
-        float totalTests = verificateur(oneData[26]);
-        float totalVaccinations = verificateur(oneData[34]);
-        float fullyVaccinated = verificateur(oneData[36]);
-        float stringencyIndex = verificateur(oneData[43]);
-        float population = verificateur(oneData[44]);
-        float gdp = verificateur(oneData[49]);
-         */
 
         // Ajout des données
         Country country = new Country();
         country.setCodeCountry(codeCountry);
         country.setNameCountry(nameCountry);
-        /*
-        country.setTotalCases(totalCases);
-        country.setTotalCases(totalCases);
-        country.setTotalDeaths(totalDeaths);
-        country.setIcuPatients(icuPatients);
-        country.setHospPatients(hospPatients);
-        country.setTotalTests(totalTests);
-        country.setTotalVaccinations(totalVaccinations);
-        country.setFullyVaccinated(fullyVaccinated);
-        country.setStringencyIndex(stringencyIndex);
-        country.setPopulation(population);
-        country.setGdp(gdp);
-         */
 
         // Lien entre Continent et Country
         Continent continent = continentDAO.findById(oneData[1]).get();
         linkContinentCountry(continent, country);
+
+        // Actualisation de Continent
+        continentDAO.save(continent);
 
         // Return
         return country;
@@ -266,6 +241,37 @@ public class ScheduledTaskTest {
         // Lien entre Country et InfoDailyCountry
         Country country = countryDAO.findById(oneData[0]).get();
         linkCountryInfoDailyCountry(country, infoDailyCountry);
+
+        // Réactualisation de Country
+        LocalDate today = LocalDate.now();
+        if (date.equals(today.minusDays(2))) {
+            // Récupétation des données actuelles de Country
+            float totalCases = verificateur(oneData[4]);
+            float totalDeaths = verificateur(oneData[7]);
+            float icuPatients = verificateur(oneData[17]);
+            float hospPatients = verificateur(oneData[19]);
+            float totalTests = verificateur(oneData[26]);
+            float totalVaccinations = verificateur(oneData[34]);
+            float fullyVaccinated = verificateur(oneData[36]);
+            float stringencyIndex = verificateur(oneData[43]);
+            float population = verificateur(oneData[44]);
+            float gdp = verificateur(oneData[49]);
+
+            // Ajout des données
+            country.setTotalCases(totalCases);
+            country.setTotalCases(totalCases);
+            country.setTotalDeaths(totalDeaths);
+            country.setIcuPatients(icuPatients);
+            country.setHospPatients(hospPatients);
+            country.setTotalTests(totalTests);
+            country.setTotalVaccinations(totalVaccinations);
+            country.setFullyVaccinated(fullyVaccinated);
+            country.setStringencyIndex(stringencyIndex);
+            country.setPopulation(population);
+            country.setGdp(gdp);
+        }
+        // Actualisation de Country
+        countryDAO.save(country);
 
         // Return
         return infoDailyCountry;
