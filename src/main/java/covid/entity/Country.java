@@ -26,7 +26,7 @@ public class Country {
     
     @Column
     private float totalDeaths;
-    /*
+    
     @Column
     private float icuPatients;
     
@@ -40,7 +40,7 @@ public class Country {
     private float totalVaccinations;
     
     @Column
-    private float fullyVaccineted;
+    private float fullyVaccinated;
     
     @Column
     private float stringencyIndex;
@@ -51,7 +51,7 @@ public class Country {
     @Column
     private float gdp;
 
-*/
+
     // Relations
     @ManyToOne
     @NonNull

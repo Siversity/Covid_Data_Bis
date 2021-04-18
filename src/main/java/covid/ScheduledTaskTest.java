@@ -58,7 +58,7 @@ public class ScheduledTaskTest {
     public void reportCurrentTime() {
         log.info("The time is now {}", dateFormat.format(new Date()));
     }
-    /*
+    
 
     //////////////////////////////////////////////////////////////////////////////////////
     // Téléchargements
@@ -113,27 +113,34 @@ public class ScheduledTaskTest {
 
             // On supprime la 1ère ligne qui correspond au no des attributs
             dataOWD.remove(0);
+            
+            int compteur = 0;
 
             // Stockage des données du fichier OWD
             for (String[] oneData : dataOWD) {
-
+                // Compteur test
+                compteur = compteur + 1;
+                System.out.println("--> COMPTEUR : " + compteur);
+                
+                // Ajout des données
                 if (!(oneData[1].isBlank())) {
-                    // Création des entités
-                    Continent newContinent = saveContinent(oneData);
-                    Country newCountry = saveCountry(oneData);
-                    InfoDailyCountry newInfoDaily = saveInfoDailyCountry(oneData);
-
-                    // Lien entre les entités
-                    linkContinentCountry(newContinent, newCountry);
-                    linkCountryInfoDailyCountry(newCountry, newInfoDaily);
-
-                    // Sauvegarde dans la BDD
-                    continentDAO.save(newContinent);
-                    countryDAO.save(newCountry);
+                    // Ajout du continent
+                    if (!(continentDAO.existsById(oneData[1]))) {
+                        Continent newContinent = saveContinent(oneData);
+                        continentDAO.save(newContinent);
+                    }
+                    
+                    // Ajout du pays
+                    if (!(countryDAO.existsById(oneData[0]))) {
+                        Country newCountry = saveCountry(oneData, continentDAO);
+                        countryDAO.save(newCountry);
+                    }
+                    
+                    // Ajout de l'infoDaily
+                    InfoDailyCountry newInfoDaily = saveInfoDailyCountry(oneData, countryDAO);
                     infoDailyCountryDAO.save(newInfoDaily);
                 }
             }
-
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(WebApp.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -180,10 +187,11 @@ public class ScheduledTaskTest {
     }
 
     // Sauvegarde Country
-    public Country saveCountry(String[] oneData) {
+    public Country saveCountry(String[] oneData,ContinentRepository continentDAO) {
         // Récupération des données
         String codeCountry = oneData[0];
         String nameCountry = oneData[2];
+        /*
         float totalCases = verificateur(oneData[4]);
         float totalDeaths = verificateur(oneData[7]);
         float icuPatients = verificateur(oneData[17]);
@@ -194,11 +202,13 @@ public class ScheduledTaskTest {
         float stringencyIndex = verificateur(oneData[43]);
         float population = verificateur(oneData[44]);
         float gdp = verificateur(oneData[49]);
+        */
 
         // Ajout des données
         Country country = new Country();
         country.setCodeCountry(codeCountry);
         country.setNameCountry(nameCountry);
+        /*
         country.setTotalCases(totalCases);
         country.setTotalCases(totalCases);
         country.setTotalDeaths(totalDeaths);
@@ -206,17 +216,22 @@ public class ScheduledTaskTest {
         country.setHospPatients(hospPatients);
         country.setTotalTests(totalTests);
         country.setTotalVaccinations(totalVaccinations);
-        country.setFullyVaccineted(fullyVaccinated);
+        country.setFullyVaccinated(fullyVaccinated);
         country.setStringencyIndex(stringencyIndex);
         country.setPopulation(population);
         country.setGdp(gdp);
-
+        */
+        
+        // Lien entre Continent et Country
+        Continent continent = continentDAO.findById(oneData[1]).get();
+        linkContinentCountry(continent, country);
+        
         // Return
         return country;
     }
 
     // Sauvegarde InfoDailyCountry
-    public InfoDailyCountry saveInfoDailyCountry(String[] oneData) throws ParseException {
+    public InfoDailyCountry saveInfoDailyCountry(String[] oneData, CountryRepository countryDAO) throws ParseException {
         // Récupération des données
         Date date = new SimpleDateFormat("yyyy-mm-dd").parse(oneData[3]);
         float newCases = verificateur(oneData[5]);
@@ -233,9 +248,13 @@ public class ScheduledTaskTest {
         infoDailyCountry.setPositiveRate(positiveRate);
         infoDailyCountry.setNewTests(newTests);
         infoDailyCountry.setNewVaccinations(newVaccinations);
+        
+        // Lien entre Country et InfoDailyCountry
+        Country country = countryDAO.findById(oneData[0]).get();
+        linkCountryInfoDailyCountry(country, infoDailyCountry);
 
         // Return
         return infoDailyCountry;
     }
-*/
+
 }
