@@ -16,6 +16,8 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -58,7 +60,6 @@ public class ScheduledTaskTest {
     public void reportCurrentTime() {
         log.info("The time is now {}", dateFormat.format(new Date()));
     }
-    
 
     //////////////////////////////////////////////////////////////////////////////////////
     // Téléchargements
@@ -113,7 +114,7 @@ public class ScheduledTaskTest {
 
             // On supprime la 1ère ligne qui correspond au no des attributs
             dataOWD.remove(0);
-            
+
             int compteur = 0;
 
             // Stockage des données du fichier OWD
@@ -121,7 +122,7 @@ public class ScheduledTaskTest {
                 // Compteur test
                 compteur = compteur + 1;
                 System.out.println("--> COMPTEUR : " + compteur);
-                
+
                 // Ajout des données
                 if (!(oneData[1].isBlank())) {
                     // Ajout du continent
@@ -129,16 +130,28 @@ public class ScheduledTaskTest {
                         Continent newContinent = saveContinent(oneData);
                         continentDAO.save(newContinent);
                     }
-                    
+
                     // Ajout du pays
                     if (!(countryDAO.existsById(oneData[0]))) {
                         Country newCountry = saveCountry(oneData, continentDAO);
                         countryDAO.save(newCountry);
                     }
-                    
+
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate date = LocalDate.parse(oneData[3], formatter);
+
+                    InfoDailyCountry newInfoDaily2 = saveInfoDailyCountry(oneData, countryDAO);
+                    infoDailyCountryDAO.save(newInfoDaily2);
+
                     // Ajout de l'infoDaily
-                    InfoDailyCountry newInfoDaily = saveInfoDailyCountry(oneData, countryDAO);
-                    infoDailyCountryDAO.save(newInfoDaily);
+                    if (!(infoDailyCountryDAO.existsById(infoDailyCountryDAO.getIdInfoCountryByCountryInformedCodeCountryAndDate(oneData[0], date)))) {
+                        InfoDailyCountry newInfoDaily = saveInfoDailyCountry(oneData, countryDAO);
+                        infoDailyCountryDAO.save(newInfoDaily);
+
+                    } else {
+                        System.out.println("=======================================================================================================================================================================================================================================================================================");
+                    }
+
                 }
             }
         } catch (Exception ex) {
@@ -187,7 +200,7 @@ public class ScheduledTaskTest {
     }
 
     // Sauvegarde Country
-    public Country saveCountry(String[] oneData,ContinentRepository continentDAO) {
+    public Country saveCountry(String[] oneData, ContinentRepository continentDAO) {
         // Récupération des données
         String codeCountry = oneData[0];
         String nameCountry = oneData[2];
@@ -202,7 +215,7 @@ public class ScheduledTaskTest {
         float stringencyIndex = verificateur(oneData[43]);
         float population = verificateur(oneData[44]);
         float gdp = verificateur(oneData[49]);
-        */
+         */
 
         // Ajout des données
         Country country = new Country();
@@ -220,12 +233,12 @@ public class ScheduledTaskTest {
         country.setStringencyIndex(stringencyIndex);
         country.setPopulation(population);
         country.setGdp(gdp);
-        */
-        
+         */
+
         // Lien entre Continent et Country
         Continent continent = continentDAO.findById(oneData[1]).get();
         linkContinentCountry(continent, country);
-        
+
         // Return
         return country;
     }
@@ -233,7 +246,8 @@ public class ScheduledTaskTest {
     // Sauvegarde InfoDailyCountry
     public InfoDailyCountry saveInfoDailyCountry(String[] oneData, CountryRepository countryDAO) throws ParseException {
         // Récupération des données
-        Date date = new SimpleDateFormat("yyyy-mm-dd").parse(oneData[3]);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(oneData[3], formatter);
         float newCases = verificateur(oneData[5]);
         float newDeaths = verificateur(oneData[8]);
         float positiveRate = verificateur(oneData[31]);
@@ -248,7 +262,7 @@ public class ScheduledTaskTest {
         infoDailyCountry.setPositiveRate(positiveRate);
         infoDailyCountry.setNewTests(newTests);
         infoDailyCountry.setNewVaccinations(newVaccinations);
-        
+
         // Lien entre Country et InfoDailyCountry
         Country country = countryDAO.findById(oneData[0]).get();
         linkCountryInfoDailyCountry(country, infoDailyCountry);

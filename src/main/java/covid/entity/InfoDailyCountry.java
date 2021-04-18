@@ -17,7 +17,7 @@ public class InfoDailyCountry {
     
     @Column
     @NonNull
-    private Date date;
+    private LocalDate date;
     
     @Column
     private float newCases;
