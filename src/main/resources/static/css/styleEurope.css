@@ -3,29 +3,61 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     Created on : 16 avr. 2021, 11:28:13
     Author     : Lisa
 */
 
 body{
     background-color: #DAD9D9;
+    font-family: Montserrat, sans-serif;
+    cursor: default;
+    margin: 0px;
 }
 
-.h1{
-top: 65px;
-left: 345px;
-text-align: center;
-font: normal normal bold 50px/67px Segoe UI;
-letter-spacing: 0px;
-color: #FFFFFF;
-opacity: 0.82;
+#titre{
+    top: 10px;
+    left: 345px;
+    text-align: center;
+    font-family: Montserrat, bold;
+    font-size: 60px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,1);
+    text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
 }
 
-#entete{
-    
-}
 
 #marge{
-    
+    margin-top: -150px;
+    margin-left: 0px;
+    width: 200px;
+    height: 1000px;
+    background: rgba(255,255,255,0.8);
+    display: flex;
+    box-shadow: 20px 20px 40px -6px rgba( 0, 0, 0, 0.2 );
+    backdrop-filter: blur( 10px );
+
 }
+
+
+#entete{
+    padding-left: 300px;
+    padding-bottom: 70px;
+    display:flex;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 150px;
+    background: rgba(29, 66, 115, 1);
+    box-shadow: 20px 20px 40px -6px rgba( 0, 0, 0, 0.4 );
+
+}
+
+#region_div{
+    background-color: transparent;
+    margin-left: 350px;
+    margin-top: -900px;
+    box-shadow: 20px 20px 40px -6px rgba( 0, 0, 0, 0.3 );
+    }
+
+
