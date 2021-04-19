@@ -22,7 +22,7 @@ function test() {
 function doAjax() {
     $.ajax({
         type: "GET",
-        url: "/api/country/getEuropeanCountries",
+        url: "/api/country/europe",
         dataType: "json",
         contentType: "application/json",
         success: drawRegionsMap,
