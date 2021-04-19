@@ -221,7 +221,7 @@ public class ScheduledTaskTest {
         float newDeaths = verificateur(oneData[8]);
         float positiveRate = verificateur(oneData[31]);
         float newTests = verificateur(oneData[25]);
-        float newVaccinations = verificateur(oneData[37]);
+        float newVaccinations = verificateur(oneData[36]);
 
         // Ajout des données
         InfoDailyCountry infoDailyCountry = new InfoDailyCountry();
@@ -245,11 +245,11 @@ public class ScheduledTaskTest {
             float icuPatients = verificateur(oneData[17]);
             float hospPatients = verificateur(oneData[19]);
             float totalTests = verificateur(oneData[26]);
-            float totalVaccinations = verificateur(oneData[34]);
-            float fullyVaccinated = verificateur(oneData[36]);
-            float stringencyIndex = verificateur(oneData[43]);
-            float population = verificateur(oneData[44]);
-            float gdp = verificateur(oneData[49]);
+            float totalVaccinations = verificateur(oneData[33]);
+            float fullyVaccinated = verificateur(oneData[35]);
+            float stringencyIndex = verificateur(oneData[42]);
+            float population = verificateur(oneData[43]);
+            float gdp = verificateur(oneData[48]);
 
             // Ajout des données
             country.setTotalCases(totalCases);
