@@ -1,6 +1,5 @@
 package covid.controller;
 
-import covid.dao.CountryRepository;
 import covid.dao.InfoDailyCountryRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
