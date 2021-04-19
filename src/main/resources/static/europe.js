@@ -23,7 +23,8 @@ function getMap(nameContinent) {
 function getRegionsInfo() {
     $.ajax({
         type: "GET",
-        url: "/api/country/continent?nameContinent=Europe",
+        url: "/api/country/continent?nameContinent=" + nameContinent,
+        data: $("#choixCarte").serialize(),
         dataType: "json",
         contentType: "application/json",
         success: drawRegionsMap,

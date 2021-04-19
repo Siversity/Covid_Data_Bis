@@ -13,6 +13,7 @@ google.charts.load('current', {
 
 google.charts.setOnLoadCallback(doAjax);
 
+
 function doAjax() {
     $.ajax({
         type: "GET",
@@ -23,7 +24,6 @@ function doAjax() {
         error: showError
     });
 }
-;
 
 function drawRegionsMap(result) {
     var headers = [["Pays", "Nouveaux Cas"]];
@@ -38,9 +38,8 @@ function drawRegionsMap(result) {
         backgroundColor: {colors: ['transparent']}};
     chart.draw(dataTable, options);
 }
-;
+
 
 function showError(xhr, status, message) {
     alert("Erreur: " + status + " : " + message);
 }
-;
