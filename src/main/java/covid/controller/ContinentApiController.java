@@ -23,12 +23,12 @@ public class ContinentApiController {
     @Autowired
     ContinentRepository continentDAO;
 
-    /*
+    // -- Nouvel ajout
     @GetMapping(path = "getContinent", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     Object getInfosContinent(@RequestParam(required = true) final String nameContinent) {
         return continentDAO.getInfosContinentByName(nameContinent);
 
     }
-*/
+
 }

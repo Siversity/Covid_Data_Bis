@@ -3,6 +3,7 @@ package covid.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import covid.entity.Country;
 import covid.dto.InfoCountry;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,12 +19,16 @@ public interface CountryRepository extends JpaRepository<Country, String> {
             , nativeQuery = true)
     List<Object> getCountriesByContinent(@Param("nameContinent") String nameContinent);
     
-    @Query(value = "SELECT code_Country, name_Country, total_Cases, total_Deaths, "
-            + "icu_Patients, hosp_Patients, total_Tests, total_Vaccinations, "
-            + "fully_Vaccinated, stringency_Index, population, gdp "
-            + "FROM Country "
-            + "WHERE name_Country = :nameCountry "
+    @Query(value = "SELECT c.code_Country, c.name_Country, c.total_Cases, c.total_Deaths, "
+            + "c.icu_Patients, c.hosp_Patients, c.total_Tests, c.total_Vaccinations, "
+            + "c.fully_Vaccinated, c.stringency_Index, c.population, c.gdp, "
+            + "i.new_Cases, i.new_Deaths "
+            + "FROM Country c "
+            + "INNER JOIN Info_Daily_Country i "
+            + "ON c.code_Country=i.country_informed_code_country "
+            + "WHERE c.name_Country = :nameCountry "
+            + "AND i.date = :date "
             , nativeQuery = true)
-    InfoCountry getCountryByName(@Param("nameCountry") String nameCountry);
+    InfoCountry getCountryByName(@Param("nameCountry") String nameCountry, @Param("date") LocalDate date);
     
 }

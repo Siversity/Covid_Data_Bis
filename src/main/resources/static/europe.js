@@ -1,4 +1,4 @@
-const mapIdContinents = [];
+const mapIdContinents = [['Africa', 002], ['Europe', 150], ['America', 019], ['Asia', 142], ['Oceania', 009]];
 
 google.charts.load('current', {
     'packages': ['geochart'],
@@ -9,16 +9,15 @@ google.charts.load('current', {
 
 google.charts.setOnLoadCallback(getRegionsInfo);
 
-function getWorldInfos() {
-    $.ajax({
-        type: "GET",
-        url: "/api/country/continent?nameContinent=Europe",
-        dataType: "json",
-        contentType: "application/json",
-        success: drawRegionsMap,
-        error: showError
-    });
+function getMap(nameContinent) {
+    for (let mapContinent of mapIdContinents) {
+        if (nameContinent == mapContinent[0]) {
+            return mapContinent[1]
+        }
+    }
+    return 0;
 }
+;
 
 
 function getRegionsInfo() {
@@ -71,11 +70,20 @@ function showInfoCountry(result) {
     var country = document.getElementById("country");
     country.innerHTML = result.name_Country;
     
+    var population = document.getElementById("population");
+    population.innerHTML = result.population;
+    
     var cases = document.getElementById("cases");
     cases.innerHTML = result.total_Cases;
     
+    var newCases = document.getElementById("newCases");
+    newCases.innerHTML = result.new_Cases;
+    
     var deaths = document.getElementById("deaths");
     deaths.innerHTML = result.total_Deaths;
+    
+    var newDeaths = document.getElementById("newDeaths");
+    newDeaths.innerHTML = result.new_Deaths;
 }
 ;
 

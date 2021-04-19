@@ -14,4 +14,6 @@ public interface InfoCountry {
     float getStringency_Index();
     float getPopulation();
     float getGdp();
+    float getNew_Cases();
+    float getNew_Deaths();
 }

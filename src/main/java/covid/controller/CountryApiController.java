@@ -33,6 +33,7 @@ public class CountryApiController {
     @GetMapping(path = "getCountry", produces = {MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody
     Object getCountryInfos(@RequestParam(required = true) final String nameCountry) {
-        return countryDAO.getCountryByName(nameCountry);
+        LocalDate today = LocalDate.now().minusDays(2);
+        return countryDAO.getCountryByName(nameCountry, today);
     }
 }
