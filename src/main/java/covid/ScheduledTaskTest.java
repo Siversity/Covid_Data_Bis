@@ -136,19 +136,11 @@ public class ScheduledTaskTest {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate date = LocalDate.parse(oneData[3], formatter);
 
-                    /*
-                    InfoDailyCountry newInfoDaily2 = saveInfoDailyCountry(oneData, countryDAO);
-                    infoDailyCountryDAO.save(newInfoDaily2);
-*/
-
                     // Ajout de l'infoDaily
                     if ((infoDailyCountryDAO.getIdInfoCountryByCountryInformedCodeCountryAndDate(oneData[0], date) == null)) {
                         InfoDailyCountry newInfoDaily = saveInfoDailyCountry(oneData, countryDAO);
                         infoDailyCountryDAO.save(newInfoDaily);
-                    } else {
-                        System.out.println("==================================================================================");
                     }
-
                 }
             }
         } catch (Exception ex) {

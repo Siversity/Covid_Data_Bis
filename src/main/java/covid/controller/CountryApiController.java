@@ -1,6 +1,9 @@
 package covid.controller;
 
 import covid.dao.CountryRepository;
+import covid.dao.InfoDailyCountryRepository;
+import covid.entity.InfoDailyCountry;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,10 +19,14 @@ public class CountryApiController {
 
     @Autowired
     private CountryRepository countryDAO;
+    
+    @Autowired
+    private InfoDailyCountryRepository infoDailyDAO;
 
     @GetMapping(path = "continent", produces = MediaType.APPLICATION_JSON_VALUE)
         public @ResponseBody List<Object> getCountriesByContinent(@RequestParam(required = true) final String nameContinent) {
-            return countryDAO.getCountriesByContinent(nameContinent);
+            LocalDate today = LocalDate.now().minusDays(2);
+            return infoDailyDAO.getNewCases(nameContinent, today);
         }
     
     @GetMapping(path = "getCountry", produces = { MediaType.APPLICATION_JSON_VALUE })

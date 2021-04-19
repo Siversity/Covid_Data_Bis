@@ -14,7 +14,7 @@ public interface CountryRepository extends JpaRepository<Country, String> {
 
     @Query(value = "SELECT name_Country, total_Cases "
             + "FROM Country "
-            + "WHERE Continent_Name_Continent = :nameContinent "
+            + "WHERE Continent_Name_Continent LIKE %:nameContinent% "
             , nativeQuery = true)
     List<Object> getCountriesByContinent(@Param("nameContinent") String nameContinent);
     
