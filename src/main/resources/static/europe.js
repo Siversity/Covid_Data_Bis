@@ -1,8 +1,4 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+const mapIdContinents = [];
 
 google.charts.load('current', {
     'packages': ['geochart'],
@@ -11,9 +7,21 @@ google.charts.load('current', {
     'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
 });
 
-google.charts.setOnLoadCallback(doAjax);
+google.charts.setOnLoadCallback(getRegionsInfo);
 
-function doAjax() {
+function getWorldInfos() {
+    $.ajax({
+        type: "GET",
+        url: "/api/country/continent?nameContinent=Europe",
+        dataType: "json",
+        contentType: "application/json",
+        success: drawRegionsMap,
+        error: showError
+    });
+}
+
+
+function getRegionsInfo() {
     $.ajax({
         type: "GET",
         url: "/api/country/continent?nameContinent=Europe",
@@ -32,11 +40,42 @@ function drawRegionsMap(result) {
     }
     var dataTable = google.visualization.arrayToDataTable(headers);
     var chart = new google.visualization.GeoChart(document.getElementById('region_div'));
+
+    google.visualization.events.addListener(chart, 'select', function () {
+        var selectedItem = chart.getSelection()[0];
+        if (selectedItem) {
+            var country = dataTable.getValue(selectedItem.row, 0);
+            console.log(country);
+            $.ajax({
+                type: "GET",
+                url: "/api/country/getCountry?nameCountry=" + country,
+                dataType: "json",
+                contentType: "application/json",
+                success: showInfoCountry,
+                error: showError
+            });
+        }
+    });
+
     var options = {
         region: '150',
+        enableRegionInteractivity: true,
         colorAxis: {colors: ['rgb(29, 66, 115)']},
         backgroundColor: {colors: ['transparent']}};
     chart.draw(dataTable, options);
+}
+;
+
+function showInfoCountry(result) {
+    
+    var country = document.getElementById("country");
+    country.innerHTML = result.name_Country;
+    
+    var cases = document.getElementById("cases");
+    cases.innerHTML = result.total_Cases;
+    
+    var deaths = document.getElementById("deaths");
+    deaths.innerHTML = result.total_Deaths;
 }
 ;
 

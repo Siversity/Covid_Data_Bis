@@ -19,18 +19,20 @@ public class CountryApiController {
 
     @Autowired
     private CountryRepository countryDAO;
-    
+
     @Autowired
     private InfoDailyCountryRepository infoDailyDAO;
 
     @GetMapping(path = "continent", produces = MediaType.APPLICATION_JSON_VALUE)
-        public @ResponseBody List<Object> getNewCasesByContinent(@RequestParam(required = true) final String nameContinent) {
-            LocalDate today = LocalDate.now().minusDays(2);
-            return infoDailyDAO.getNewCases(nameContinent, today);
-        }
-    
-    @GetMapping(path = "getCountry", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody Object getCountryInfos(@RequestParam(required = true) final String nameCountry) {
-		return countryDAO.getCountryByName(nameCountry);
-	}
+    public @ResponseBody
+    List<Object> getNewCasesByContinent(@RequestParam(required = true) final String nameContinent) {
+        LocalDate today = LocalDate.now().minusDays(2);
+        return infoDailyDAO.getNewCases(nameContinent, today);
+    }
+
+    @GetMapping(path = "getCountry", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public @ResponseBody
+    Object getCountryInfos(@RequestParam(required = true) final String nameCountry) {
+        return countryDAO.getCountryByName(nameCountry);
+    }
 }
