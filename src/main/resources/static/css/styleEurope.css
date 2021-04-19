@@ -10,7 +10,7 @@ and open the template in the editor.
 
 body{
     background-color: #DAD9D9;
-    font-family: Montserrat, sans-serif;
+    font-family: Hind Vadodara, sans-serif;
     cursor: default;
     margin: 0px;
 }
@@ -19,11 +19,12 @@ body{
     top: 10px;
     left: 345px;
     text-align: center;
-    font-family: Montserrat, bold;
-    font-size: 60px;
-    letter-spacing: 2px;
+    font-family: Hind Vadodara, sans-serif;
+    font-size: 38px;
+    letter-spacing: 3px;
+    font-weight: 500;
     color: rgba(255,255,255,1);
-    text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+    margin-top:1em;
 }
 
 
@@ -31,11 +32,13 @@ body{
     margin-top: -150px;
     margin-left: 0px;
     width: 200px;
-    height: 1000px;
+    height: 800px;
     background: rgba(255,255,255,0.8);
     display: flex;
-    box-shadow: 20px 20px 40px -6px rgba( 0, 0, 0, 0.2 );
+    box-shadow: 2px 2px 4px -2px rgba( 0, 0, 0, 0.2 );
     backdrop-filter: blur( 10px );
+    position: fixed;
+    flex-direction: column;
 
 }
 
@@ -48,16 +51,54 @@ body{
     margin-left: 0px;
     margin-right: 0px;
     height: 150px;
-    background: rgba(29, 66, 115, 1);
-    box-shadow: 20px 20px 40px -6px rgba( 0, 0, 0, 0.4 );
+    background: rgba(21, 61, 119, 1);
+    box-shadow: 2px 2px 4px -2px rgba( 0, 0, 0, 0.2 );
 
 }
 
 #region_div{
-    background-color: transparent;
+    width: 800px;
+    height: 500px;
+    background-color: white;
     margin-left: 350px;
+    box-shadow: 2px 2px 4px -2px rgba( 0, 0, 0, 0.2 );
+    border-radius: 100px;
+}
+
+#infoEurope{
+    width: 400px
+    height: 500px;
+    margin-left: 1150px;
+    box-shadow: 2px 2px 4px -2px rgba( 0, 0, 0, 0.2 );
+    border-radius: 100px;
+}
+
+#marge a{
+    color: rgba(21, 61, 119, 1);
+    text-align: center;
+    margin-bottom: 1.5em;
+    margin-top: 1em;
+    text-decoration: none;
+    font-family: Hind Vadodara, sans-serif;
+    font-size: 25px;
+}
+
+a:hover{
+    font-weight: bold;
+}
+
+#nivMonde{
     margin-top: -900px;
-    box-shadow: 20px 20px 40px -6px rgba( 0, 0, 0, 0.3 );
-    }
+}
+
+#nivEurope{
+    margin-top: 1000px;
+}
+
+#nivAmerique{
+    margin-top: 2000px;
+}
+
+
 
 
