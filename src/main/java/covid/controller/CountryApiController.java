@@ -24,13 +24,13 @@ public class CountryApiController {
     private InfoDailyCountryRepository infoDailyDAO;
 
     @GetMapping(path = "continent", produces = MediaType.APPLICATION_JSON_VALUE)
-        public @ResponseBody List<Object> getCountriesByContinent(@RequestParam(required = true) final String nameContinent) {
+        public @ResponseBody List<Object> getNewCasesByContinent(@RequestParam(required = true) final String nameContinent) {
             LocalDate today = LocalDate.now().minusDays(2);
             return infoDailyDAO.getNewCases(nameContinent, today);
         }
     
     @GetMapping(path = "getCountry", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody Object getCountry(@RequestParam(required = true) final String nameCountry) {
-		return countryDAO.getCountry(nameCountry);
+	public @ResponseBody Object getCountryInfos(@RequestParam(required = true) final String nameCountry) {
+		return countryDAO.getCountryByName(nameCountry);
 	}
 }

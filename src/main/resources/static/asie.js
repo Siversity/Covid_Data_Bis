@@ -41,5 +41,4 @@ function drawRegionsMap(result) {
 
 function showError(xhr, status, message) {
     alert("Erreur: " + status + " : " + message);
-}
-;
+};

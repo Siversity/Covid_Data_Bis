@@ -19,7 +19,7 @@ public class InfoDailyCountryApiController {
     
     
     @GetMapping(path = "stats", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody List<Object> getStatsCountry(@RequestParam(required = true) final String nameCountry) {
-		return infoDailyDAO.getStatsCountry(nameCountry);
+	public @ResponseBody List<Object> getAllDailyStatsCountry(@RequestParam(required = true) final String nameCountry) {
+		return infoDailyDAO.getAllDailyStatsCountryByName(nameCountry);
 	}
 }

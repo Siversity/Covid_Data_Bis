@@ -23,7 +23,7 @@ public interface InfoDailyCountryRepository extends JpaRepository<InfoDailyCount
             + "ON Info_Daily_Country.Country_Informed_Code_Country=Country.Code_Country "
             + "WHERE Country.name_Country = :nameCountry "
             , nativeQuery = true)
-    List<Object> getStatsCountry(@Param("nameCountry") String nameCountry);
+    List<Object> getAllDailyStatsCountryByName(@Param("nameCountry") String nameCountry);
     
     @Query(value = "SELECT Country.name_Country, Info_Daily_Country.new_Cases "
             + "FROM Info_Daily_Country "

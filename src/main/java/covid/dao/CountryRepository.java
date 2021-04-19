@@ -24,6 +24,6 @@ public interface CountryRepository extends JpaRepository<Country, String> {
             + "FROM Country "
             + "WHERE name_Country = :nameCountry "
             , nativeQuery = true)
-    InfoCountry getCountry(@Param("nameCountry") String nameCountry);
+    InfoCountry getCountryByName(@Param("nameCountry") String nameCountry);
     
 }
