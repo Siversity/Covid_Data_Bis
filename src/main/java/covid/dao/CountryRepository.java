@@ -14,9 +14,9 @@ public interface CountryRepository extends JpaRepository<Country, String> {
 
     @Query(value = "SELECT name_Country, total_Cases "
             + "FROM Country "
-            + "WHERE Continent_Name_Continent = 'Europe' "
+            + "WHERE Continent_Name_Continent = :nameContinent "
             , nativeQuery = true)
-    List<Object> getEuropeanCountries();
+    List<Object> getCountriesByContinent(@Param("nameContinent") String nameContinent);
     
     @Query(value = "SELECT code_Country, name_Country, total_Cases, total_Deaths, "
             + "icu_Patients, hosp_Patients, total_Tests, total_Vaccinations, "

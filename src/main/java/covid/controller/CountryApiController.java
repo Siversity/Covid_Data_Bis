@@ -17,9 +17,9 @@ public class CountryApiController {
     @Autowired
     private CountryRepository countryDAO;
 
-    @GetMapping(path = "europe", produces = MediaType.APPLICATION_JSON_VALUE)
-        public @ResponseBody List<Object> getEuropeanCountries() {
-            return countryDAO.getEuropeanCountries();
+    @GetMapping(path = "continent", produces = MediaType.APPLICATION_JSON_VALUE)
+        public @ResponseBody List<Object> getCountriesByContinent(@RequestParam(required = true) final String nameContinent) {
+            return countryDAO.getCountriesByContinent(nameContinent);
         }
     
     @GetMapping(path = "getCountry", produces = { MediaType.APPLICATION_JSON_VALUE })
