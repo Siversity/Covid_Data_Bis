@@ -1,3 +1,4 @@
+//Table de correspondance qui associe la bonne carte au nom du continent
 const mapIdContinents = [['Africa', 002], ['Europe', 150], ['America', 019], ['Asia', 142], ['Oceania', 009]];
 
 google.charts.load('current', {
@@ -7,8 +8,10 @@ google.charts.load('current', {
     'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
 });
 
+//on fait l'appel AJAX dès le chargement de la page
 google.charts.setOnLoadCallback(getRegionsInfo);
 
+//fonction qui retourne la carte associée au nom du continent
 function getMap(nameContinent) {
     for (let mapContinent of mapIdContinents) {
         if (nameContinent == mapContinent[0]) {
@@ -17,21 +20,21 @@ function getMap(nameContinent) {
     }
     return 0;
 }
-;
 
 
+//requête AJAX qui récupère les données à afficher
 function getRegionsInfo() {
     $.ajax({
         type: "GET",
-        url: "/api/country/continent?nameContinent=" + nameContinent,
-        data: $("#choixCarte").serialize(),
+        url: "/api/country/continent?nameContinent="+$("#choixCarte").serialize(),//comment récupérer le nom du continent ?
+        //on passe comme paramètre les données saisie dans le formulaire
+        //data $("#choixCarte").serialize(),
         dataType: "json",
         contentType: "application/json",
         success: drawRegionsMap,
         error: showError
     });
 }
-;
 
 function drawRegionsMap(result) {
     var headers = [["Pays", "Nouveaux Cas"]];
@@ -40,6 +43,7 @@ function drawRegionsMap(result) {
     }
     var dataTable = google.visualization.arrayToDataTable(headers);
     var chart = new google.visualization.GeoChart(document.getElementById('region_div'));
+
 
     google.visualization.events.addListener(chart, 'select', function () {
         var selectedItem = chart.getSelection()[0];
@@ -55,16 +59,17 @@ function drawRegionsMap(result) {
                 error: showError
             });
         }
-    });
+});
 
     var options = {
-        region: '150',
+        region: getMap($("#choixCarte").serialize()).value(),
         enableRegionInteractivity: true,
         colorAxis: {colors: ['rgb(29, 66, 115)']},
         backgroundColor: {colors: ['transparent']}};
     chart.draw(dataTable, options);
 }
-;
+
+
 
 function showInfoCountry(result) {
     
@@ -86,9 +91,8 @@ function showInfoCountry(result) {
     var newDeaths = document.getElementById("newDeaths");
     newDeaths.innerHTML = result.new_Deaths;
 }
-;
 
+//fonction qui traite les erreurs de la requête
 function showError(xhr, status, message) {
     alert("Erreur: " + status + " : " + message);
 }
-;
