@@ -1,0 +1,108 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 16 avr. 2021, 11:28:13
+    Author     : Lisa
+*/
+
+body{
+    background-color: #DAD9D9;
+    font-family: Hind Vadodara, sans-serif;
+    cursor: default;
+    margin: 0px;
+}
+
+#titre{
+    margin-top: 100px;
+    left: 345px;
+    text-align: center;
+    font-family: Hind Vadodara, sans-serif;
+    font-size: 38px;
+    letter-spacing: 3px;
+    font-weight: 500;
+    color: rgba(255,255,255,1);
+}
+
+
+#marge{
+    margin-top: -150px;
+    margin-left: 0px;
+    width: 200px;
+    height: 800px;
+    background: rgba(255,255,255,0.8);
+    display: flex;
+    box-shadow: 2px 2px 4px -2px rgba( 0, 0, 0, 0.2 );
+    backdrop-filter: blur( 10px );
+    position: fixed;
+    flex-direction: column;
+
+}
+
+
+#entete{
+    padding-left: 300px;
+    padding-bottom: 70px;
+    display:flex;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 150px;
+    background: rgba(21, 61, 119, 1);
+    box-shadow: 2px 2px 4px -2px rgba( 0, 0, 0, 0.2 );
+
+}
+
+#region_div{
+    width: 800px;
+    height: 500px;
+    background-color: white;
+    margin-left: 300px;
+    margin-top: -1030px;
+    box-shadow: 2px 2px 4px -2px rgba( 0, 0, 0, 0.2 );
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+#infoEurope{
+    width: 400px
+    height: 500px;
+    margin-left: 1150px;
+    box-shadow: 2px 2px 4px -2px rgba( 0, 0, 0, 0.2 );
+    border-radius: 100px;
+}
+
+#marge a{
+    color: rgba(21, 61, 119, 1);
+    text-align: center;
+    margin-bottom: 1.5em;
+    margin-top: 1em;
+    text-decoration: none;
+    font-family: Hind Vadodara, sans-serif;
+    font-size: 25px;
+}
+
+a:hover,
+a:focus,
+a:active{
+    font-weight: bold;
+}
+
+#nivMonde{
+    margin-top: -900px;
+}
+
+#nivEurope{
+    margin-top: 1000px;
+}
+
+#nivAmerique{
+    margin-top: 2000px;
+}
+
+
+
+

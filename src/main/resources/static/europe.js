@@ -13,12 +13,6 @@ google.charts.load('current', {
 
 google.charts.setOnLoadCallback(doAjax);
 
-function test() {
-    var result = [["China", 15.0], ['Germany', 10.0], ['Italy', 20.0], ['Spain', 50.0]];
-    drawRegionsMap(result);
-}
-;
-
 function doAjax() {
     $.ajax({
         type: "GET",
@@ -32,7 +26,7 @@ function doAjax() {
 ;
 
 function drawRegionsMap(result) {
-    var headers = [["Pays", "Cas Totaux"]];
+    var headers = [["Pays", "Nouveaux Cas"]];
     for (let i = 0; i < result.length; i++) {
         headers.push(result[i]);
     }
