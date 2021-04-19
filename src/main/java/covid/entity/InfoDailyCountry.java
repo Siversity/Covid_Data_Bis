@@ -20,6 +20,12 @@ public class InfoDailyCountry {
     private LocalDate date;
     
     @Column
+    private float totalCases;
+    
+    @Column
+    private float totalDeaths;
+    
+    @Column
     private float newCases;
     
     @Column

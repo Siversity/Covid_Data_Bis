@@ -223,6 +223,8 @@ public class ScheduledTaskTest {
         // Récupération des données
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(oneData[3], formatter);
+        float totalCases = verificateur(oneData[4]);
+        float totalDeaths = verificateur(oneData[7]);
         float newCases = verificateur(oneData[5]);
         float newDeaths = verificateur(oneData[8]);
         float positiveRate = verificateur(oneData[31]);
@@ -232,6 +234,8 @@ public class ScheduledTaskTest {
         // Ajout des données
         InfoDailyCountry infoDailyCountry = new InfoDailyCountry();
         infoDailyCountry.setDate(date);
+        infoDailyCountry.setTotalCases(totalCases);
+        infoDailyCountry.setTotalCases(totalDeaths);
         infoDailyCountry.setNewCases(newCases);
         infoDailyCountry.setNewDeaths(newDeaths);
         infoDailyCountry.setPositiveRate(positiveRate);
@@ -246,8 +250,6 @@ public class ScheduledTaskTest {
         LocalDate today = LocalDate.now();
         if (date.equals(today.minusDays(2))) {
             // Récupétation des données actuelles de Country
-            float totalCases = verificateur(oneData[4]);
-            float totalDeaths = verificateur(oneData[7]);
             float icuPatients = verificateur(oneData[17]);
             float hospPatients = verificateur(oneData[19]);
             float totalTests = verificateur(oneData[26]);
