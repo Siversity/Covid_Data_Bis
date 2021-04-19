@@ -83,7 +83,9 @@ body{
     font-size: 25px;
 }
 
-a:hover{
+a:hover,
+a:focus,
+a:active{
     font-weight: bold;
 }
 
