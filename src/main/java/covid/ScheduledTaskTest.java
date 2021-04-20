@@ -87,10 +87,10 @@ public class ScheduledTaskTest {
             // Lecture du fichier OWD
             // On initialise un tableau et une variable vide qui va contenir les élements lus par le Reader
             List<String[]> dataOWD = new ArrayList<String[]>();
-            String[] nextLine = null;
+            String[] nextLine = csvrOWD.readNext();
             System.out.println(nextLine);
             // Si la ligne lue n'est pas vide
-            while ((nextLine = csvrOWD.readNext()) != null) {
+            while (nextLine != null) {
                 int size = nextLine.length;
                 if (size == 0) {
                     continue;
@@ -103,6 +103,7 @@ public class ScheduledTaskTest {
                     continue;
                 }
                 dataOWD.add(nextLine);
+                nextLine = csvrOWD.readNext();
             }
 
             // On supprime la 1ère ligne qui correspond au no des attributs
