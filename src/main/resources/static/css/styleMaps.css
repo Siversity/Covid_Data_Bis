@@ -15,16 +15,25 @@ body{
     margin: 0px;
 }
 
-#logo{
-    display: flex;
-    top: 5px;
-    left: 5px;
-    height: 50px;
+#divLogo{
+    margin-top: 15px;
+    text-align: right;
+    font-family: Hind Vadodara, sans-serif;
+    color: rgba(255,255,255,0.8);
+    flex-direction: column;
+    line-height: 0.3;
+}
+
+.h2{
+    font-size: 40px;
+}
+.h3{
+    font-size: 20px;
 }
 
 #titre{
     margin-top: 100px;
-    left: 345px;
+    left: 385px;
     text-align: center;
     font-family: Hind Vadodara, sans-serif;
     font-size: 38px;
@@ -35,13 +44,13 @@ body{
 
 
 #marge{
-    padding-top: 200px;
-    padding-left: 15px;
+    padding-top: 10px;
+    padding-left: 25px;
     margin-top: -115px;
     margin-left: 0px;
     width: 200px;
     height: 800px;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.5);
     display: flex;
     box-shadow: 2px 2px 4px -2px rgba( 0, 0, 0, 0.2 );
     backdrop-filter: blur( 10px );
@@ -50,7 +59,17 @@ body{
 
 }
 
+#retour{
+    margin-top: 5px;
+    color: rgba(21, 61, 119, 1);
+    text-decoration: none;
+    font-family: Hind Vadodara, sans-serif;
+    font-size: 20px
+    cursor: pointer;
+}
+
 #formulaireContinent{
+    margin-top: 200px;
     justify-content: space-between;
     text-align: left;
     background-color:transparent;
@@ -61,8 +80,8 @@ body{
 }
 
 select{
-    background-color: rgba( 255, 255, 255, 0.5 );
-    border-color: transparent;s
+    background-color: rgba( 255, 255, 255, 0.3 );
+    border-color: transparent;
     backdrop-filter: blur(0.5px);
     color: rgba(21, 61, 119, 1);
     font-family: Hind Vadodara, sans-serif;
@@ -84,13 +103,16 @@ select:focus{
 
 
 #entete{
-    padding-left: 300px;
+    justify-content: space-between;
+    padding-right: 450px;
+    padding-left: 50px;
     padding-bottom: 70px;
     display:flex;
     margin-top: 0px;
     margin-left: 0px;
     margin-right: 0px;
     height: 150px;
+    width: auto;
     background: rgba(21, 61, 119, 1);
     box-shadow: 2px 2px 4px -2px rgba( 0, 0, 0, 0.2 );
 
@@ -100,7 +122,7 @@ select:focus{
     width: 800px;
     height: 500px;
     background-color: white;
-    margin-left: 250px;
+    margin-left: 290px;
     margin-top: -50px;
     box-shadow: 2px 2px 4px -2px rgba( 0, 0, 0, 0.2 );
     padding: 5px;
@@ -109,27 +131,29 @@ select:focus{
 
 #infos{
     width: 300px;
-    height: 400px;
-    background-color: white;
+    height: 550px;
+    background-color: rgba(255,255,255,0.9);
     box-shadow: 2px 2px 4px -2px rgba( 0, 0, 0, 0.2 );
     padding: 5px;
     border-radius: 5px;
     position: absolute;
-    margin-top: -500px;
+    margin-top: -550px;
     right: 50px;
-}
-
-#marge a{
-    text-color: rgba(21, 61, 119, 1);
-    text-align: center;
-    margin-bottom: 1.5em;
-    margin-top: 1em;
-    text-decoration: none;
     font-family: Hind Vadodara, sans-serif;
     font-size: 25px;
-    background-color: transparent;
-    border-color: transparent;
+    color: rgba(21, 61, 119, 1);
+    backdrop-filter: blur(0.2px);
+    padding-top: 15px;
+    text-align: center;
 }
+
+#attention{
+    margin-left: 300px;
+    font-family: Hind Vadodara, sans-serif;
+    font-size: 15px;
+    color: rgba(21, 61, 119, 1);
+}
+
 
 map:hover,
 map:focus,
