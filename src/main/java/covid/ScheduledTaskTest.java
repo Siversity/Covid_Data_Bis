@@ -105,6 +105,8 @@ public class ScheduledTaskTest {
                 dataOWD.add(nextLine);
                 nextLine = csvrOWD.readNext();
             }
+            frOWD.close();
+            csvrOWD.close();
 
             // On supprime la 1ère ligne qui correspond au no des attributs
             dataOWD.remove(0);
