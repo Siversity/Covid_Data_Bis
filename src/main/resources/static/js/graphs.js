@@ -32,7 +32,6 @@ function getCountryStats(country) {
 document.getElementById("nameContinent").addEventListener("change", getAreaStats());
 function getAreaStats() {
     var map = document.getElementById("nameContinent").value;
-    console.log(map);
     if (map != 'World') {
         $.ajax({
             type: "GET",

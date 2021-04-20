@@ -101,7 +101,7 @@ function showInfoCountry(result) {
     table.style.display = "initial";
     
     var country = document.getElementById("title");
-    country.innerHTML = result.name_Country;
+    country.innerHTML = result.name;
     
     showInfo(result);
 }
@@ -122,21 +122,21 @@ function showInfo(result) {
     table.style.display = "initial";
 
     var population = document.getElementById("population");
-    population.innerHTML = result.population.toLocaleString();
+    population.innerHTML = result.pop.toLocaleString();
     var cases = document.getElementById("cases");
-    cases.innerHTML = result.total_Cases.toLocaleString();
+    cases.innerHTML = result.tcases.toLocaleString();
     var newCases = document.getElementById("newCases");
-    newCases.innerHTML = result.new_Cases.toLocaleString();
+    newCases.innerHTML = result.ncases.toLocaleString();
     var deaths = document.getElementById("deaths");
-    deaths.innerHTML = result.total_Deaths.toLocaleString();
+    deaths.innerHTML = result.tdeaths.toLocaleString();
     var newDeaths = document.getElementById("newDeaths");
-    newDeaths.innerHTML = result.new_Deaths.toLocaleString();
+    newDeaths.innerHTML = result.ndeaths.toLocaleString();
     var vaccinations = document.getElementById("vaccinations");
-    vaccinations.innerHTML = result.total_Vaccinations.toLocaleString();
+    vaccinations.innerHTML = result.tvaccinations.toLocaleString();
     var vaccinations2nd = document.getElementById("vaccinations2nd");
-    vaccinations2nd.innerHTML = result.fully_Vaccinated.toLocaleString();
+    vaccinations2nd.innerHTML = result.fvaccinated.toLocaleString();
     var newVaccinations = document.getElementById("newVaccinations");
-    newVaccinations.innerHTML = result.new_Vaccinations.toLocaleString();
+    newVaccinations.innerHTML = result.nvaccinations.toLocaleString();
 
 }
 
