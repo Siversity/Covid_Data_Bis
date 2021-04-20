@@ -73,11 +73,11 @@ function drawRegionsMap(result) {
 // Fonction permettant d'afficher les infos des continents quand on sélectionne leur map
 document.getElementById("nameContinent").addEventListener("change", getMapsInfo());
 function getMapsInfo() {
-    var nameContinent = document.getElementById("nameContinent").value;
-    if (nameContinent != 'World') {
+    var map = document.getElementById("nameContinent").value;
+    if (map != 'World') {
         $.ajax({
             type: "GET",
-            url: "/api/continent/getContinent?nameContinent=" + document.getElementById("nameContinent").value,
+            url: "/api/continent/getContinent?nameContinent=" + map,
             dataType: "json",
             contentType: "application/json",
             success: showInfoMap,
@@ -86,7 +86,7 @@ function getMapsInfo() {
     } else {
         $.ajax({
             type: "GET",
-            url: "/api/world/infos",
+            url: "/api/world/getWorld",
             dataType: "json",
             contentType: "application/json",
             success: showInfoMap,

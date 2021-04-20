@@ -13,13 +13,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Service
 @RequestMapping(path = "/api/infoDaily")
 public class InfoDailyCountryApiController {
-    
+
     @Autowired
     InfoDailyCountryRepository infoDailyDAO;
+
+    @GetMapping(path = "country/stats", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public @ResponseBody
+    List<Object> getAllDailyStatsCountry(@RequestParam(required = true) final String nameCountry) {
+        return infoDailyDAO.getAllDailyStatsByCountry(nameCountry);
+    }
+
+    @GetMapping(path = "continent/stats", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public @ResponseBody
+    List<Object> getAllDailyStatsContinent(@RequestParam(required = true) final String nameContinent) {
+        return infoDailyDAO.getAllDailyStatsByContinent(nameContinent);
+    }
     
-    
-    @GetMapping(path = "stats", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody List<Object> getAllDailyStatsCountry(@RequestParam(required = true) final String nameCountry) {
-		return infoDailyDAO.getAllDailyStatsCountryByName(nameCountry);
-	}
+    @GetMapping(path = "world/stats", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    List<Object> getAllDailyStatsWorld() {
+        return infoDailyDAO.getAllDailyStatsWorld();
+    }
 }

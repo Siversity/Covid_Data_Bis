@@ -6,6 +6,7 @@
 package covid.apicontroller;
 
 import covid.dao.ContinentRepository;
+import covid.dao.CountryRepository;
 import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,14 +23,15 @@ public class ContinentApiController {
 
     @Autowired
     ContinentRepository continentDAO;
+    @Autowired
+    CountryRepository countryDAO;
 
-    // -- Nouvel ajout
+    // API renvoyant les infos d'un Continent
     @GetMapping(path = "getContinent", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     InfoContinent getInfosContinent(@RequestParam(required = true) final String nameContinent) {
         LocalDate today = LocalDate.now().minusDays(2);
-        return continentDAO.getInfosContinentByName(nameContinent, today);
-
+        return countryDAO.getInfosContinentByName(nameContinent, today);
     }
 
 }

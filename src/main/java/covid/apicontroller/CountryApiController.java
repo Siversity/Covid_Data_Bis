@@ -2,6 +2,7 @@ package covid.apicontroller;
 
 import covid.dao.CountryRepository;
 import covid.dao.InfoDailyCountryRepository;
+import covid.dto.InfoContinent;
 import covid.dto.InfoCountry;
 import covid.entity.InfoDailyCountry;
 import java.time.LocalDate;
@@ -20,7 +21,6 @@ public class CountryApiController {
 
     @Autowired
     private CountryRepository countryDAO;
-
     @Autowired
     private InfoDailyCountryRepository infoDailyDAO;
 
@@ -37,6 +37,8 @@ public class CountryApiController {
     public @ResponseBody
     InfoCountry getCountryInfos(@RequestParam(required = true) final String nameCountry) {
         LocalDate today = LocalDate.now().minusDays(2);
-        return countryDAO.getCountryByName(nameCountry, today);
+        return countryDAO.getInfoCountryByName(nameCountry, today);
     }
+    
+    
 }

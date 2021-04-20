@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Actu covid en Europe</title>
+        <title>ISIS - Covid Data</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -27,10 +27,10 @@
             <a href="#graphe" id="nivGraphe">Graph</a>
             <form id="formulaireContinent">
             <label for="nameContinent">Where ?</label><br>
-            <select  class="selectpicker" data-style="btn-primary" id="nameContinent" name="nameContinent" onchange="getRegionsInfo(); getMapsInfo()">
+            <select  class="selectpicker" data-style="btn-primary" id="nameContinent" name="nameContinent" onchange="getRegionsInfo(); getMapsInfo(); getAreaStats()">
                 <option value="World" selected="selected">World</option>
                 <option th:each="c: ${continents}" th:value='${c.nameContinent}' value="1" th:text="${c.nameContinent}">
-                    Le libellé de la catégorie
+                    Selected map
                 </option>
             </select>
         </form>
@@ -48,47 +48,47 @@
                     <td id="population"></td>
                 </tr>
                 <tr>
-                    <th class="s-titre" colspan="2">Cas</th>
+                    <th class="s-titre" colspan="2">Cases</th>
                 </tr>
                 <tr>
-                    <td class="typeInfo"> Cas totaux</td>
+                    <td class="typeInfo">Total Cases</td>
                     <td id="cases"></td>
                 </tr>
                 <tr>
-                    <td class="typeInfo"> Nouveaux cas</td>
+                    <td class="typeInfo">New cases</td>
                     <td id="newCases"></td>
                 </tr>
                 <tr>
-                    <th class="s-titre" colspan="2">Morts</th>
+                    <th class="s-titre" colspan="2">Deaths</th>
                 </tr>
                 <tr>
-                    <td class="typeInfo"> Morts totaux</td>
+                    <td class="typeInfo">Total Deaths</td>
                     <td id="deaths"></td>
                 </tr>
                 <tr>
-                    <td class="typeInfo"> Nouveaux morts</td>
+                    <td class="typeInfo">New Deaths</td>
                     <td id="newDeaths"></td>
                 </tr>
                 <tr>
                     <th class="s-titre" colspan="2">Vaccinations</th>
                 </tr>
                 <tr>
-                    <td class="typeInfo"> Vaccinations totales</td>
+                    <td class="typeInfo">Total Vaccinations</td>
                     <td id="vaccinations"></td>
                 </tr>
                 <tr>
-                    <td class="typeInfo"> Totalement vaccinés</td>
+                    <td class="typeInfo">Fully Vaccinated</td>
                     <td id="vaccinations2nd"></td>
                 </tr>
                 <tr>
-                    <td class="typeInfo"> Nouvelles vaccinations</td>
+                    <td class="typeInfo">New Vaccinations</td>
                     <td id="newVaccinations"></td>
                 </tr>
 
             </table>
         </div>
 
-        <p id="attention">Attention, certaines données peuvent ne pas être renseignées et sont automatiquement remplacées par "0".</p>
+        <p id="attention">Some data may not be filled in and are automatically replaced by "0".</p>
 
         <div id="graphe"></div>
 
