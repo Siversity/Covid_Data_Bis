@@ -64,7 +64,6 @@ public class ScheduledTaskTest {
     //////////////////////////////////////////////////////////////////////////////////////
     // Téléchargements
     //////////////////////////////////////////////////////////////////////////////////////
-
     // Téléchargement fichier OWD
     @Scheduled(initialDelay = 1000, fixedRate = 86400000)
     public void downloadFile() {
@@ -151,7 +150,7 @@ public class ScheduledTaskTest {
     // Vérificateur donnée
     public float verificateur(String attribute) {
         float value = 0;
-        if (!(attribute.isBlank())) {
+        if (!((attribute == null) || (attribute.length()) == 0)) {
             value = Float.valueOf(attribute);
         }
         return value;
@@ -270,18 +269,4 @@ public class ScheduledTaskTest {
         // Return
         return infoDailyCountry;
     }
-    
-    public static boolean isBlank(final CharSequence cs) {
-    int strLen;
-    if (cs == null || (strLen = cs.length()) == 0) {
-        return true;
-    }
-    for (int i = 0; i < strLen; i++) {
-        if (!Character.isWhitespace(cs.charAt(i))) {
-            return false;
-        }
-    }
-    return true;
-}
-
 }
