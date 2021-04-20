@@ -119,7 +119,7 @@ public class ScheduledTaskTest {
                 System.out.println("--> COMPTEUR : " + compteur);
 
                 // Ajout des données
-                if (!(oneData[1].isBlank())) {
+                if (!((oneData[1] == null) || (oneData[1].length()) == 0)) {
                     // Ajout du continent
                     if (!(continentDAO.existsById(oneData[1]))) {
                         Continent newContinent = saveContinent(oneData);
