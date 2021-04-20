@@ -91,7 +91,6 @@ public class ScheduledTaskTest {
             oneData = csvrOWD.readNext();
             // Si la ligne lue n'est pas vide
             while (oneData != null) {
-                
                 /*
                 int size = nextLine.length;
                 if (size == 0) {
