@@ -20,7 +20,7 @@ public class ContinentController {
     ContinentRepository continentDAO;
 
     @GetMapping(path = "map")
-    public String montreStatsProduits(Model model) {
+    public String showContinentList(Model model) {
         model.addAttribute("continents", continentDAO.findAll());
         return "maps";
     }
