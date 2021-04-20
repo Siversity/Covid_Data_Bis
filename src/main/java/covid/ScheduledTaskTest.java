@@ -220,8 +220,8 @@ public class ScheduledTaskTest {
         float newCases = verificateur(oneData[5]);
         float newDeaths = verificateur(oneData[8]);
         float positiveRate = verificateur(oneData[31]);
-        float newTests = verificateur(oneData[25]);
-        float newVaccinations = verificateur(oneData[36]);
+        float newTests = verificateur(oneData[26]);
+        float newVaccinations = verificateur(oneData[37]);
 
         // Ajout des données
         InfoDailyCountry infoDailyCountry = new InfoDailyCountry();
@@ -244,12 +244,12 @@ public class ScheduledTaskTest {
             // Récupétation des données actuelles de Country
             float icuPatients = verificateur(oneData[17]);
             float hospPatients = verificateur(oneData[19]);
-            float totalTests = verificateur(oneData[26]);
-            float totalVaccinations = verificateur(oneData[33]);
-            float fullyVaccinated = verificateur(oneData[35]);
-            float stringencyIndex = verificateur(oneData[42]);
-            float population = verificateur(oneData[43]);
-            float gdp = verificateur(oneData[48]);
+            float totalTests = verificateur(oneData[25]);
+            float totalVaccinations = verificateur(oneData[34]);
+            float fullyVaccinated = verificateur(oneData[36]);
+            float stringencyIndex = verificateur(oneData[43]);
+            float population = verificateur(oneData[44]);
+            float gdp = verificateur(oneData[49]);
 
             // Ajout des données
             country.setTotalCases(totalCases);

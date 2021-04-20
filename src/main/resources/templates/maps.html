@@ -20,7 +20,7 @@
         <div id="marge">
             <form id="formulaireContinent">
             <label for="nameContinent">Carte sélectionnée</label><br>
-            <select  class="selectpicker" data-style="btn-primary" id="nameContinent" name="nameContinent" onchange="getRegionsInfo()">
+            <select  class="selectpicker" data-style="btn-primary" id="nameContinent" name="nameContinent" onchange="getRegionsInfo(); getMapsInfo()">
                 <option value="World" selected="selected">World</option>
                 <option th:each="c: ${continents}" th:value='${c.nameContinent}' value="1" th:text="${c.nameContinent}">
                     Le libellé de la catégorie
@@ -32,13 +32,16 @@
 
         <div id="region_div"></div>
         <div id="infos">
-            <table>
+            <table id="tableInfo">
                 <tr>
                     <th colspan="2" id="country"></th>
                 </tr>
                 <tr>
                     <td> Population :</td>
                     <td id="population"></td>
+                </tr>
+                <tr>
+                    <th colspan="2">Cas</th>
                 </tr>
                 <tr>
                     <td> Nombre total de cas :</td>
@@ -49,12 +52,26 @@
                     <td id="newCases"></td>
                 </tr>
                 <tr>
+                    <th colspan="2">Morts</th>
+                </tr>
+                <tr>
                     <td> Nombre total de morts :</td>
                     <td id="deaths"></td>
                 </tr>
                 <tr>
                     <td> Nouveaux morts :</td>
                     <td id="newDeaths"></td>
+                </tr>
+                <tr>
+                    <th colspan="2">Vaccinations</th>
+                </tr>
+                <tr>
+                    <td> Nombre total de morts :</td>
+                    <td id="vaccinations"></td>
+                </tr>
+                <tr>
+                    <td> Nouveaux morts :</td>
+                    <td id="newVaccinations"></td>
                 </tr>
                 
             </table>

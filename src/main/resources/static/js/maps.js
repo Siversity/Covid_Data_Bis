@@ -1,6 +1,5 @@
 // Table de correspondance qui associe la bonne carte au nom du continent
 const mapIdContinents = [['World', 'world'], ['Africa', '002'], ['Europe', '150'], ['America', '019'], ['Asia', '142'], ['Oceania', '009'], ['North America', '021'], ['South America', '005']];
-
 // Lancemenet de l'API Google permettant de charger les maps
 google.charts.load('current', {'packages': ['geochart'], 'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'});
 
@@ -68,18 +67,48 @@ function drawRegionsMap(result) {
 
 // Fonction permettant d'afficher les infos des pays
 function showInfoCountry(result) {
+    var table = document.getElementById("tableInfo");
+    table.style.display = "initial";
+
     var country = document.getElementById("country");
     country.innerHTML = result.name_Country;
     var population = document.getElementById("population");
-    population.innerHTML = result.population;
+    population.innerHTML = result.population.toLocaleString();
     var cases = document.getElementById("cases");
-    cases.innerHTML = result.total_Cases;
+    cases.innerHTML = result.total_Cases.toLocaleString();
     var newCases = document.getElementById("newCases");
-    newCases.innerHTML = result.new_Cases;
+    newCases.innerHTML = result.new_Cases.toLocaleString();
     var deaths = document.getElementById("deaths");
-    deaths.innerHTML = result.total_Deaths;
+    deaths.innerHTML = result.total_Deaths.toLocaleString();
     var newDeaths = document.getElementById("newDeaths");
-    newDeaths.innerHTML = result.new_Deaths;
+    newDeaths.innerHTML = result.new_Deaths.toLocaleString();
+    var vaccinations = document.getElementById("vaccinations");
+    vaccinations.innerHTML = result.total_Vaccinations.toLocaleString();
+    var newVaccinations = document.getElementById("newVaccinations");
+    newVaccinations.innerHTML = result.new_Vaccinations.toLocaleString();
+}
+
+// A FAIRE
+// Fonction permettant d'afficher les infos des continents quand on sélectionne leur map
+function getMapsInfo() {
+    console.log("changer" + document.getElementById("nameContinent").value);
+    var nameContinent = document.getElementById("nameContinent").value;
+    if (nameContinent != 'World') {
+        
+    }
+    else {
+        
+    }
+}
+
+// Fonction permettant d'afficher les infos des continents
+function showInfoContinent() {
+    
+}
+
+// Fonction permettant d'afficher les infos du monde
+function showInfoWorld() {
+    
 }
 
 //fonction qui traite les erreurs de la requête
