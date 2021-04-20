@@ -90,11 +90,11 @@ public class ScheduledTaskTest {
             String[] nextLine = null;
             // Si la ligne lue n'est pas vide
             while (csvrOWD.readNext() != null) {
-                int size = nextLine.length;
+                int size = csvrOWD.readNext().length;
                 if (size == 0) {
                     continue;
                 }
-                String debut = nextLine[0].trim();
+                String debut = csvrOWD.readNext()[0].trim();
                 if (debut.length() == 0 && size == 1) {
                     continue;
                 }
