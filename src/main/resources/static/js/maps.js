@@ -33,7 +33,7 @@ function getRegionsInfo() {
 
 // Function permettant d'afficher les cartes
 function drawRegionsMap(result) {
-    var headers = [["Pays", "Nouveaux Cas"]];
+    var headers = [["Country", "New Cases"]];
     for (let i = 0; i < result.length; i++) {
         headers.push(result[i]);
     }
@@ -45,6 +45,7 @@ function drawRegionsMap(result) {
         var selectedItem = chart.getSelection()[0];
         if (selectedItem) {
             var country = dataTable.getValue(selectedItem.row, 0);
+            getCountryStats(country);
             $.ajax({
                 type: "GET",
                 url: "/api/country/getCountry?nameCountry=" + country,
@@ -53,6 +54,7 @@ function drawRegionsMap(result) {
                 success: showInfoCountry,
                 error: showError
             });
+            
         }
     });
     var options = {
@@ -73,7 +75,6 @@ document.getElementById("nameContinent").addEventListener("change", getMapsInfo(
 function getMapsInfo() {
     var nameContinent = document.getElementById("nameContinent").value;
     if (nameContinent != 'World') {
-        console.log("nameContinent = " + nameContinent);
         $.ajax({
             type: "GET",
             url: "/api/continent/getContinent?nameContinent=" + document.getElementById("nameContinent").value,

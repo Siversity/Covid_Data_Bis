@@ -1,6 +1,7 @@
 package covid.dto;
 
 public interface InfoContinent {
+    
     String getContinent_Name_Continent();
     float getTotal_Cases();
     float getTotal_Deaths();

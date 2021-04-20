@@ -25,6 +25,5 @@ public class WorldApiController {
     InfoWorld getInfosWorld() {
         LocalDate today = LocalDate.now().minusDays(2);
         return continentDAO.getInfosWorld(today);
-
     }
 }
