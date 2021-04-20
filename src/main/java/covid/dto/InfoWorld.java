@@ -13,4 +13,5 @@ public interface InfoWorld {
     float getNew_Cases();
     float getNew_Deaths();
     float getNew_Vaccinations();
+    
 }

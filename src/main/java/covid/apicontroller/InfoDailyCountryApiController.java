@@ -28,10 +28,11 @@ public class InfoDailyCountryApiController {
     List<Object> getAllDailyStatsContinent(@RequestParam(required = true) final String nameContinent) {
         return infoDailyDAO.getAllDailyStatsByContinent(nameContinent);
     }
-    
+
     @GetMapping(path = "world/stats", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     List<Object> getAllDailyStatsWorld() {
         return infoDailyDAO.getAllDailyStatsWorld();
     }
+
 }

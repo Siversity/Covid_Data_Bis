@@ -1,29 +1,32 @@
 package covid.entity;
+
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.*;
 import lombok.*;
 
-// Un exemple d'entité
-// On utilise Lombok pour auto-générer getter / setter / toString...
-// cf. https://examples.javacodegeeks.com/spring-boot-with-lombok/
-@Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
-@Entity // Une entité JPA
+@Getter
+@Setter
+@NoArgsConstructor
+@RequiredArgsConstructor
+@ToString
+@Entity
 public class Continent {
-    
+
     // Attributs
-    @Column (unique=true)
+    @Column(unique = true)
     @NonNull
     @Id
     private String nameContinent;
-    
+
     // Relations
-    @OneToMany(fetch=FetchType.EAGER, mappedBy = "continent", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "continent", cascade = CascadeType.ALL)
     List<Country> countries = new LinkedList<Country>();
-    
+
     // Ajout de Country
     public void addCountry(Country country) {
         this.countries.add(country);
         country.setContinent(this);
     }
+
 }

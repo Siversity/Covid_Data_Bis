@@ -14,4 +14,5 @@ public interface InfoContinent {
     float getNew_Cases();
     float getNew_Deaths();
     float getNew_Vaccinations();
+    
 }

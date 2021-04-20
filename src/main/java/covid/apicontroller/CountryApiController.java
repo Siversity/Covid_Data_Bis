@@ -2,9 +2,7 @@ package covid.apicontroller;
 
 import covid.dao.CountryRepository;
 import covid.dao.InfoDailyCountryRepository;
-import covid.dto.InfoContinent;
 import covid.dto.InfoCountry;
-import covid.entity.InfoDailyCountry;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +37,5 @@ public class CountryApiController {
         LocalDate today = LocalDate.now().minusDays(2);
         return countryDAO.getInfoCountryByName(nameCountry, today);
     }
-    
-    
+
 }

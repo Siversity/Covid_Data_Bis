@@ -52,7 +52,5 @@ public interface InfoDailyCountryRepository extends JpaRepository<InfoDailyCount
             + "GROUP BY date ",
             nativeQuery = true)
     List<Object> getAllDailyStatsWorld();
-
     
-
 }

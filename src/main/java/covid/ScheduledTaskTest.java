@@ -15,15 +15,11 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -61,9 +57,7 @@ public class ScheduledTaskTest {
     public void reportCurrentTime() {
         log.info("The time is now {}", dateFormat.format(new Date()));
     }
-    */
-
-    
+     */
     //////////////////////////////////////////////////////////////////////////////////////
     // Téléchargements
     //////////////////////////////////////////////////////////////////////////////////////
@@ -272,4 +266,5 @@ public class ScheduledTaskTest {
         // Return
         return infoDailyCountry;
     }
+
 }

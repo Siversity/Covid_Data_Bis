@@ -5,5 +5,4 @@ import covid.entity.Continent;
 
 public interface ContinentRepository extends JpaRepository<Continent, String> {
     
-    
 }
