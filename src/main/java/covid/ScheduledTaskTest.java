@@ -88,20 +88,21 @@ public class ScheduledTaskTest {
             // On initialise un tableau et une variable vide qui va contenir les élements lus par le Reader
             List<String[]> dataOWD = new ArrayList<String[]>();
             String[] nextLine = null;
+            System.out.println(nextLine);
             // Si la ligne lue n'est pas vide
-            while (csvrOWD.readNext() != null) {
-                int size = csvrOWD.readNext().length;
+            while ((nextLine = csvrOWD.readNext()) != null) {
+                int size = nextLine.length;
                 if (size == 0) {
                     continue;
                 }
-                String debut = csvrOWD.readNext()[0].trim();
+                String debut = nextLine[0].trim();
                 if (debut.length() == 0 && size == 1) {
                     continue;
                 }
                 if (debut.startsWith("#")) {
                     continue;
                 }
-                dataOWD.add(csvrOWD.readNext());
+                dataOWD.add(nextLine);
             }
 
             // On supprime la 1ère ligne qui correspond au no des attributs
