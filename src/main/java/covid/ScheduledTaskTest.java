@@ -89,7 +89,7 @@ public class ScheduledTaskTest {
             List<String[]> dataOWD = new ArrayList<String[]>();
             String[] nextLine = null;
             // Si la ligne lue n'est pas vide
-            while ((nextLine = csvrOWD.readNext()) != null) {
+            while (csvrOWD.readNext() != null) {
                 int size = nextLine.length;
                 if (size == 0) {
                     continue;
@@ -101,7 +101,7 @@ public class ScheduledTaskTest {
                 if (debut.startsWith("#")) {
                     continue;
                 }
-                dataOWD.add(nextLine);
+                dataOWD.add(csvrOWD.readNext());
             }
 
             // On supprime la 1ère ligne qui correspond au no des attributs
