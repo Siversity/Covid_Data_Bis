@@ -53,6 +53,7 @@ public class ScheduledTaskTest {
     //////////////////////////////////////////////////////////////////////////////////////
     // Test
     //////////////////////////////////////////////////////////////////////////////////////
+    /*
     private static final Logger log = LoggerFactory.getLogger(ScheduledTaskTest.class);
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
@@ -60,8 +61,9 @@ public class ScheduledTaskTest {
     public void reportCurrentTime() {
         log.info("The time is now {}", dateFormat.format(new Date()));
     }
+    */
 
-    /*
+    
     //////////////////////////////////////////////////////////////////////////////////////
     // Téléchargements
     //////////////////////////////////////////////////////////////////////////////////////
@@ -270,5 +272,4 @@ public class ScheduledTaskTest {
         // Return
         return infoDailyCountry;
     }
-    */
 }

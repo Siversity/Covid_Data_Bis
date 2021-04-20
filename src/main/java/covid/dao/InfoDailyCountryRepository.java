@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-// This will be AUTO IMPLEMENTED by Spring 
 public interface InfoDailyCountryRepository extends JpaRepository<InfoDailyCountry, Integer> {
 
     // Requête permettant de récupérer l'ID à partir de la date et du codeCountry
