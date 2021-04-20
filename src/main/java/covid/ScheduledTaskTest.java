@@ -86,11 +86,13 @@ public class ScheduledTaskTest {
 
             // Lecture du fichier OWD
             // On initialise un tableau et une variable vide qui va contenir les élements lus par le Reader
-            List<String[]> dataOWD = new ArrayList<String[]>();
-            String[] nextLine = csvrOWD.readNext();
-            System.out.println(nextLine);
+            // List<String[]> dataOWD = new ArrayList<String[]>();
+            String[] oneData = csvrOWD.readNext();
+            oneData = csvrOWD.readNext();
             // Si la ligne lue n'est pas vide
-            while (nextLine != null) {
+            while (oneData != null) {
+                
+                /*
                 int size = nextLine.length;
                 if (size == 0) {
                     continue;
@@ -101,23 +103,9 @@ public class ScheduledTaskTest {
                 }
                 if (debut.startsWith("#")) {
                     continue;
-                }
-                dataOWD.add(nextLine);
-                nextLine = csvrOWD.readNext();
-            }
-            frOWD.close();
-            csvrOWD.close();
-
-            // On supprime la 1ère ligne qui correspond au no des attributs
-            dataOWD.remove(0);
-
-            int compteur = 0;
-
-            // Stockage des données du fichier OWD
-            for (String[] oneData : dataOWD) {
-                // Compteur test
-                compteur = compteur + 1;
-                System.out.println("--> COMPTEUR : " + compteur);
+                }*/
+                //dataOWD.add(nextLine);
+                //or (String[] oneData : dataOWD) {
 
                 // Ajout des données
                 if (!((oneData[1] == null) || (oneData[1].length()) == 0)) {
@@ -141,8 +129,21 @@ public class ScheduledTaskTest {
                         InfoDailyCountry newInfoDaily = saveInfoDailyCountry(oneData, countryDAO);
                         infoDailyCountryDAO.save(newInfoDaily);
                     }
-                }
+                //}
             }
+                
+                
+                
+                
+                
+                oneData = csvrOWD.readNext();
+            }
+
+            // On supprime la 1ère ligne qui correspond au no des attributs
+            //dataOWD.remove(0);
+
+            // Stockage des données du fichier OWD
+            
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(WebApp.class.getName()).log(Level.SEVERE, null, ex);
         }
