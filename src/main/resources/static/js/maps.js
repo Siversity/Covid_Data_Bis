@@ -65,15 +65,7 @@ function drawRegionsMap(result) {
 }
 
 
-// Fonction permettant d'afficher les infos des pays
-function showInfoCountry(result) {
-    var table = document.getElementById("tableInfo");
-    table.style.display = "initial";
-    
-    var country = document.getElementById("country");
-    country.innerHTML = result.name_Country;
-    showInfo(result);
-}
+
 
 // A FAIRE
 // Fonction permettant d'afficher les infos des continents quand on sélectionne leur map
@@ -87,7 +79,7 @@ function getMapsInfo() {
             url: "/api/continent/getContinent?nameContinent=" + document.getElementById("nameContinent").value,
             dataType: "json",
             contentType: "application/json",
-            success: showInfo,
+            success: showInfoMap,
             error: showError
         });
     } else {
@@ -96,10 +88,31 @@ function getMapsInfo() {
             url: "/api/world/infos",
             dataType: "json",
             contentType: "application/json",
-            success: showInfo,
+            success: showInfoMap,
             error: showError
         });
     }
+}
+
+// Fonction permettant d'afficher les infos des pays
+function showInfoCountry(result) {
+    var table = document.getElementById("tableInfo");
+    table.style.display = "initial";
+    
+    var country = document.getElementById("title");
+    country.innerHTML = result.name_Country;
+    
+    showInfo(result);
+}
+
+function showInfoMap(result) {
+    var table = document.getElementById("tableInfo");
+    table.style.display = "initial";
+    
+    var country = document.getElementById("title");
+    country.innerHTML = document.getElementById("nameContinent").value;
+    
+    showInfo(result);
 }
 
 // Fonction permettant d'afficher les infos des continents
@@ -107,8 +120,6 @@ function showInfo(result) {
     var table = document.getElementById("tableInfo");
     table.style.display = "initial";
 
-    var country = document.getElementById("title");
-    country.innerHTML = document.getElementById("nameContinent").value;
     var population = document.getElementById("population");
     population.innerHTML = result.population.toLocaleString();
     var cases = document.getElementById("cases");
