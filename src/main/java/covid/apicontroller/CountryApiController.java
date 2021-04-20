@@ -2,6 +2,7 @@ package covid.apicontroller;
 
 import covid.dao.CountryRepository;
 import covid.dao.InfoDailyCountryRepository;
+import covid.dto.InfoCountry;
 import covid.entity.InfoDailyCountry;
 import java.time.LocalDate;
 import java.util.List;
@@ -23,6 +24,7 @@ public class CountryApiController {
     @Autowired
     private InfoDailyCountryRepository infoDailyDAO;
 
+    // API utilisée par GeoChart Google
     @GetMapping(path = "continent", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     List<Object> getNewCasesByContinent() {
@@ -30,9 +32,10 @@ public class CountryApiController {
         return infoDailyDAO.getNewCases(today);
     }
 
+    // API utilisée pour afficher les infos d'un pays sélectionné
     @GetMapping(path = "getCountry", produces = {MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody
-    Object getCountryInfos(@RequestParam(required = true) final String nameCountry) {
+    InfoCountry getCountryInfos(@RequestParam(required = true) final String nameCountry) {
         LocalDate today = LocalDate.now().minusDays(2);
         return countryDAO.getCountryByName(nameCountry, today);
     }

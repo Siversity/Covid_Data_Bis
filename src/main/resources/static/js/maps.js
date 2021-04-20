@@ -69,9 +69,46 @@ function drawRegionsMap(result) {
 function showInfoCountry(result) {
     var table = document.getElementById("tableInfo");
     table.style.display = "initial";
-
+    
     var country = document.getElementById("country");
     country.innerHTML = result.name_Country;
+    showInfo(result);
+}
+
+// A FAIRE
+// Fonction permettant d'afficher les infos des continents quand on sélectionne leur map
+document.getElementById("nameContinent").addEventListener("change", getMapsInfo());
+function getMapsInfo() {
+    var nameContinent = document.getElementById("nameContinent").value;
+    if (nameContinent != 'World') {
+        console.log("nameContinent = " + nameContinent);
+        $.ajax({
+            type: "GET",
+            url: "/api/continent/getContinent?nameContinent=" + document.getElementById("nameContinent").value,
+            dataType: "json",
+            contentType: "application/json",
+            success: showInfo,
+            error: showError
+        });
+    } else {
+        $.ajax({
+            type: "GET",
+            url: "/api/world/infos",
+            dataType: "json",
+            contentType: "application/json",
+            success: showInfo,
+            error: showError
+        });
+    }
+}
+
+// Fonction permettant d'afficher les infos des continents
+function showInfo(result) {
+    var table = document.getElementById("tableInfo");
+    table.style.display = "initial";
+
+    var country = document.getElementById("title");
+    country.innerHTML = document.getElementById("nameContinent").value;
     var population = document.getElementById("population");
     population.innerHTML = result.population.toLocaleString();
     var cases = document.getElementById("cases");
@@ -84,31 +121,11 @@ function showInfoCountry(result) {
     newDeaths.innerHTML = result.new_Deaths.toLocaleString();
     var vaccinations = document.getElementById("vaccinations");
     vaccinations.innerHTML = result.total_Vaccinations.toLocaleString();
+    var vaccinations2nd = document.getElementById("vaccinations2nd");
+    vaccinations2nd.innerHTML = result.fully_Vaccinated.toLocaleString();
     var newVaccinations = document.getElementById("newVaccinations");
     newVaccinations.innerHTML = result.new_Vaccinations.toLocaleString();
-}
 
-// A FAIRE
-// Fonction permettant d'afficher les infos des continents quand on sélectionne leur map
-function getMapsInfo() {
-    console.log("changer" + document.getElementById("nameContinent").value);
-    var nameContinent = document.getElementById("nameContinent").value;
-    if (nameContinent != 'World') {
-        
-    }
-    else {
-        
-    }
-}
-
-// Fonction permettant d'afficher les infos des continents
-function showInfoContinent() {
-    
-}
-
-// Fonction permettant d'afficher les infos du monde
-function showInfoWorld() {
-    
 }
 
 //fonction qui traite les erreurs de la requête

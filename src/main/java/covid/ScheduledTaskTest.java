@@ -227,7 +227,7 @@ public class ScheduledTaskTest {
         InfoDailyCountry infoDailyCountry = new InfoDailyCountry();
         infoDailyCountry.setDate(date);
         infoDailyCountry.setTotalCases(totalCases);
-        infoDailyCountry.setTotalCases(totalDeaths);
+        infoDailyCountry.setTotalDeaths(totalDeaths);
         infoDailyCountry.setNewCases(newCases);
         infoDailyCountry.setNewDeaths(newDeaths);
         infoDailyCountry.setPositiveRate(positiveRate);
