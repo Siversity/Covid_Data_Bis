@@ -59,17 +59,9 @@ body{
 
 }
 
-#retour{
-    margin-top: 5px;
-    color: rgba(21, 61, 119, 1);
-    text-decoration: none;
-    font-family: Hind Vadodara, sans-serif;
-    font-size: 20px
-    cursor: pointer;
-}
 
 #formulaireContinent{
-    margin-top: 200px;
+    margin-top: 100px;
     justify-content: space-between;
     text-align: left;
     background-color:transparent;
@@ -100,7 +92,26 @@ select:hover{
 select:focus{
     outline: none;
 }
+#retour,#nivCarte,#nivGraphe{
+    font-family: Hind Vadodara, sans-serif;
+    font-weight: 500;
+    font-size: 30px
+}
 
+a{
+    margin-top: 50px;
+    color: rgba(21, 61, 119, 1);
+    text-decoration: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+a:hover,
+a:focus,
+a:active{
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: bold;
+}
 
 #entete{
     justify-content: space-between;
@@ -142,21 +153,33 @@ select:focus{
 }
 
 #infos{
-    width: 300px;
+    width: 350px;
     height: 550px;
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(255,255,255,1);
     box-shadow: 2px 2px 4px -2px rgba( 0, 0, 0, 0.2 );
     padding: 5px;
     border-radius: 5px;
     position: absolute;
     margin-top: -550px;
-    right: 50px;
+    right: 25px;
     font-family: Hind Vadodara, sans-serif;
     font-size: 25px;
     color: rgba(21, 61, 119, 1);
     backdrop-filter: blur(0.2px);
-    padding-top: 15px;
+    padding-top: 10px;
     text-align: center;
+
+}
+
+.typeInfo{
+    font-size: 17.5px;
+    margin-left: 1px;
+    text-align: center;
+}
+
+.s-titre{
+    border-top: 0.5px solid rgba(21, 61, 119, 1);
+    width : 250px;
 }
 
 #attention{
@@ -166,15 +189,10 @@ select:focus{
     color: rgba(21, 61, 119, 1);
 }
 
-
-map:hover,
-map:focus,
-map:active{
-    font-weight: bold;
-}
-
 #tableInfo {
     display: none;
+    border-collapse : separate;
+    border-spacing : 12px;
 }
 
 
