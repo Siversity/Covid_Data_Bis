@@ -17,8 +17,6 @@ import java.nio.channels.ReadableByteChannel;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -61,8 +59,7 @@ public class ScheduledTaskTest {
             FileOutputStream fileOS = new FileOutputStream("dataOWD.csv");
             // On stocke les données téléchargées dans le chemin
             FileChannel writeChannel = fileOS.getChannel();
-            writeChannel
-                    .transferFrom(readChannel, 0, Long.MAX_VALUE);
+            writeChannel.transferFrom(readChannel, 0, Long.MAX_VALUE);
 
             // Traitement du fichier OWD
             // On transforme le chemin en fichier csv
@@ -78,50 +75,38 @@ public class ScheduledTaskTest {
             // Si la ligne lue n'est pas vide
             while (oneData != null) {
 
-                // Ajout des données
+                // Lecture et ajout des données ligne par ligne
                 if (!((oneData[1] == null) || (oneData[1].length()) == 0)) {
-                    // Ajout du continent
+                    // Ajout du Continent
                     if (!(continentDAO.existsById(oneData[1]))) {
                         Continent newContinent = saveContinent(oneData);
                         continentDAO.save(newContinent);
                     }
 
-                    // Ajout du pays
+                    // Ajout du Country
                     if (!(countryDAO.existsById(oneData[0]))) {
                         Country newCountry = saveCountry(oneData, continentDAO);
                         countryDAO.save(newCountry);
                     }
 
+                    // Variables permettant de vérifier si l'InfoDailyCountry existe déjà
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate date = LocalDate.parse(oneData[3], formatter);
 
-                    // Ajout de l'infoDaily
+                    // Ajout de l'InfoDaily
                     if ((infoDailyCountryDAO.getIdInfoCountryByCountryInformedCodeCountryAndDate(oneData[0], date) == null)) {
                         InfoDailyCountry newInfoDaily = saveInfoDailyCountry(oneData, countryDAO);
                         infoDailyCountryDAO.save(newInfoDaily);
                     }
-                //}
-            }
+                    //}
+                }
                 oneData = csvrOWD.readNext();
             }
 
-            // On supprime la 1ère ligne qui correspond au no des attributs
-            //dataOWD.remove(0);
-
             // Stockage des données du fichier OWD
-            
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(WebApp.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    // Vérificateur donnée
-    public float verificateur(String attribute) {
-        float value = 0;
-        if (!((attribute == null) || (attribute.length()) == 0)) {
-            value = Float.valueOf(attribute);
-        }
-        return value;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -237,5 +222,15 @@ public class ScheduledTaskTest {
         // Return
         return infoDailyCountry;
     }
-    
+
+    // Vérificateur donnée
+    public float verificateur(String attribute) {
+        float value = 0;
+        // On vérifie que la chaine de caractère n'est pas nulle ou vide
+        if (!((attribute == null) || (attribute.length()) == 0)) {
+            value = Float.valueOf(attribute);
+        }
+        return value;
+    }
+
 }

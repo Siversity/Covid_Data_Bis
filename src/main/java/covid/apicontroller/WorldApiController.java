@@ -19,6 +19,7 @@ public class WorldApiController {
     @Autowired
     CountryRepository countryDAO;
 
+    // API renvoyant les infos actualisées de World
     @GetMapping(path = "getWorld", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     InfoWorld getInfosWorld() {

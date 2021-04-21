@@ -23,7 +23,7 @@ public class Continent {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "continent", cascade = CascadeType.ALL)
     List<Country> countries = new LinkedList<Country>();
 
-    // Ajout de Country
+    // Lien entre Country - Continent
     public void addCountry(Country country) {
         this.countries.add(country);
         country.setContinent(this);

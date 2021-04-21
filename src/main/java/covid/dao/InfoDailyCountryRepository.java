@@ -30,7 +30,8 @@ public interface InfoDailyCountryRepository extends JpaRepository<InfoDailyCount
             + "FROM Info_Daily_Country "
             + "INNER JOIN Country "
             + "ON Info_Daily_Country.Country_Informed_Code_Country=Country.Code_Country "
-            + "WHERE Country.name_Country = :nameCountry ",
+            + "WHERE Country.name_Country = :nameCountry "
+            + "ORDER BY date ",
             nativeQuery = true)
     List<Object> getAllDailyStatsByCountry(@Param("nameCountry") String nameCountry);
 
@@ -41,7 +42,7 @@ public interface InfoDailyCountryRepository extends JpaRepository<InfoDailyCount
             + "ON Info_Daily_Country.Country_Informed_Code_Country=Country.Code_Country "
             + "WHERE Country.Continent_Name_Continent = :nameContinent "
             + "GROUP BY date "
-            + "ORDER BY date",
+            + "ORDER BY date ",
             nativeQuery = true)
     List<Object> getAllDailyStatsByContinent(@Param("nameContinent") String nameContinent);
     
@@ -51,7 +52,7 @@ public interface InfoDailyCountryRepository extends JpaRepository<InfoDailyCount
             + "INNER JOIN Country "
             + "ON Info_Daily_Country.Country_Informed_Code_Country=Country.Code_Country "
             + "GROUP BY date "
-            + "ORDER BY date",
+            + "ORDER BY date ",
             nativeQuery = true)
     List<Object> getAllDailyStatsWorld();
     

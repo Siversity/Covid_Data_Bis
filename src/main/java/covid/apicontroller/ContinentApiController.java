@@ -19,7 +19,7 @@ public class ContinentApiController {
     @Autowired
     CountryRepository countryDAO;
 
-    // API renvoyant les infos d'un Continent
+    // API renvoyant les infos actualisées d'un Continent
     @GetMapping(path = "getContinent", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     InfoContinent getInfosContinent(@RequestParam(required = true) final String nameContinent) {

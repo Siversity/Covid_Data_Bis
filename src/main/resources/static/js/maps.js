@@ -1,5 +1,6 @@
-// Table de correspondance qui associe la bonne carte au nom du continent
+// Table de correspondance qui associe la bonne carte au nom de la zone
 const mapIdContinents = [['World', 'world'], ['Africa', '002'], ['Europe', '150'], ['America', '019'], ['Asia', '142'], ['Oceania', '009'], ['North America', '021'], ['South America', '005']];
+
 // Lancemenet de l'API Google permettant de charger les maps
 google.charts.load('current', {'packages': ['geochart'], 'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'});
 
@@ -13,7 +14,7 @@ function getMap(nameContinent) {
             return mapContinent[1]
         }
     }
-    return 0;
+    return ['World', 'world'];
 }
 
 
@@ -22,8 +23,6 @@ function getRegionsInfo() {
     $.ajax({
         type: "GET",
         url: "/api/country/continent",
-        // On a pas besoin de ça vu que les données sont partagées par toutes les maps (dont la map World)
-        // data: $('#formulaireContinent').serialize(), --> Mais si on décide d'afficher les cartes des pays on en aura besoin
         dataType: "json",
         contentType: "application/json",
         success: drawRegionsMap,
@@ -33,12 +32,22 @@ function getRegionsInfo() {
 
 // Function permettant d'afficher les cartes
 function drawRegionsMap(result) {
+    // Initialisation des colonnes
     var headers = [["Country", "New Cases"]];
+    
+    // On ajoute chaque ligne de l'API dans une table de données
     for (let i = 0; i < result.length; i++) {
         headers.push(result[i]);
     }
+    
     var dataTable = google.visualization.arrayToDataTable(headers);
     var chart = new google.visualization.GeoChart(document.getElementById('region_div'));
+    var options = {
+        // On fait appel à la fonction permettant de récupérer l'id des maps
+        region: getMap(document.getElementById("nameContinent").value),
+        enableRegionInteractivity: true,
+        colorAxis: {colors: ['rgb(29, 66, 115)']},
+        backgroundColor: {colors: ['transparent']}};
 
     // Pour chaque pays affiché, on ajoute un évènement afin de lire ses infos
     google.visualization.events.addListener(chart, 'select', function () {
@@ -57,23 +66,20 @@ function drawRegionsMap(result) {
             
         }
     });
-    var options = {
-        // On fait appel à la fonction permettant de récupérer les maps
-        region: getMap(document.getElementById("nameContinent").value),
-        enableRegionInteractivity: true,
-        colorAxis: {colors: ['rgb(29, 66, 115)']},
-        backgroundColor: {colors: ['transparent']}};
+    
+    // On affiche la map
     chart.draw(dataTable, options);
 }
 
 
 
 
-// A FAIRE
 // Fonction permettant d'afficher les infos des continents quand on sélectionne leur map
 document.getElementById("nameContinent").addEventListener("change", getMapsInfo());
 function getMapsInfo() {
     var map = document.getElementById("nameContinent").value;
+    
+    // On vérifie que la map sélectionnée n'est pas celle de World
     if (map != 'World') {
         $.ajax({
             type: "GET",
@@ -95,32 +101,40 @@ function getMapsInfo() {
     }
 }
 
-// Fonction permettant d'afficher les infos des pays
+// Fonction permettant d'afficher les infos d'un Country
 function showInfoCountry(result) {
+    // On rend le tableau visible
     var table = document.getElementById("tableInfo");
     table.style.display = "initial";
     
+    // On met en titre du tableau le nom du Country
     var country = document.getElementById("title");
     country.innerHTML = result.name;
     
+    // On affiche les infos
     showInfo(result);
 }
 
 function showInfoMap(result) {
+    // On rend le tableau visible
     var table = document.getElementById("tableInfo");
     table.style.display = "initial";
     
+    // On met en titre du tableau le nom de la Map
     var country = document.getElementById("title");
     country.innerHTML = document.getElementById("nameContinent").value;
     
+    // On affiche les infos
     showInfo(result);
 }
 
 // Fonction permettant d'afficher les infos des continents
 function showInfo(result) {
+    // On rend le tableau visible
     var table = document.getElementById("tableInfo");
     table.style.display = "initial";
 
+// On récupère et affiche les infos
     var population = document.getElementById("population");
     population.innerHTML = result.pop.toLocaleString();
     var cases = document.getElementById("cases");
@@ -140,7 +154,7 @@ function showInfo(result) {
 
 }
 
-//fonction qui traite les erreurs de la requête
+// Fonction qui traite les erreurs de la requête
 function showError(xhr, status, message) {
     alert("Erreur: " + status + " : " + message);
 }

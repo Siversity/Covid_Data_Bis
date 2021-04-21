@@ -60,10 +60,5 @@ public class Country {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "countryInformed")
     private List<InfoDailyCountry> infos = new LinkedList<>();
-
-    // Lien Country Continent
-    public void addContinent(Continent continent) {
-        this.continent = continent;
-    }
     
 }

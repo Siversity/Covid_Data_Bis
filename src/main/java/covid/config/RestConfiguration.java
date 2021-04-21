@@ -13,7 +13,6 @@ public class RestConfiguration implements RepositoryRestConfigurer {
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-        // Lister les classes dont on veut exposer les clés dans l'API REST
         config.exposeIdsFor(Country.class, Continent.class, InfoDailyCountry.class);
     }
 
