@@ -238,6 +238,10 @@ public class ScheduledTaskTest {
         // On vérifie que la chaine de caractère n'est pas nulle ou vide
         if (!((attribute == null) || (attribute.length()) == 0)) {
             value = Float.valueOf(attribute);
+            // On vérifie que la valeur obtenue n'est pas négative
+            if (value < 0) {
+                value = value * -1;
+            }
         }
         return value;
     }
