@@ -98,7 +98,6 @@ public class ScheduledTaskTest {
                         InfoDailyCountry newInfoDaily = saveInfoDailyCountry(oneData, countryDAO);
                         infoDailyCountryDAO.save(newInfoDaily);
                     }
-                    //}
                 }
                 oneData = csvrOWD.readNext();
             }

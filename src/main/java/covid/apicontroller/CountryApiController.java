@@ -25,9 +25,33 @@ public class CountryApiController {
     // API utilisée par GeoChart Google rencoyant le nom d'un Country et le nombre de nouveaux cas récent
     @GetMapping(path = "newcases", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    List<Object> getNewCasesByContinent() {
+    List<Object> getNewCases() {
         LocalDate today = LocalDate.now().minusDays(2);
         return infoDailyDAO.getNewCases(today);
+    }
+
+    // API utilisée par GeoChart Google rencoyant le nom d'un Country et le nombre de nouveaux morts récent
+    @GetMapping(path = "newdeaths", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    List<Object> getNewDeaths() {
+        LocalDate today = LocalDate.now().minusDays(2);
+        return infoDailyDAO.getNewDeaths(today);
+    }
+    
+    // API utilisée par GeoChart Google rencoyant le nom d'un Country et le nombre de nouveaux cas totaux
+    @GetMapping(path = "totalcases", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    List<Object> getTotalCases() {
+        LocalDate today = LocalDate.now().minusDays(2);
+        return countryDAO.getTotalCases();
+    }
+    
+    // API utilisée par GeoChart Google rencoyant le nom d'un Country et le nombre de nouveaux morts totaux
+    @GetMapping(path = "totaldeaths", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    List<Object> geTotalDeaths() {
+        LocalDate today = LocalDate.now().minusDays(2);
+        return countryDAO.getTotalDeaths();
     }
 
     // API utilisée pour afficher les infos actualisées d'un Country
@@ -37,5 +61,7 @@ public class CountryApiController {
         LocalDate today = LocalDate.now().minusDays(2);
         return countryDAO.getInfoCountryByName(nameCountry, today);
     }
+    
+    
 
 }

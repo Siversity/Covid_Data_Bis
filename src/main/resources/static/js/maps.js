@@ -20,9 +20,10 @@ function getMap(nameContinent) {
 
 // Requête AJAX qui récupère les données à afficher
 function getRegionsInfo() {
+    var nameAttribute = document.getElementById("nameAttribute").value;
     $.ajax({
         type: "GET",
-        url: "/api/country/newcases",
+        url: "/api/country/" + nameAttribute,
         dataType: "json",
         contentType: "application/json",
         success: drawRegionsMap,
@@ -33,7 +34,9 @@ function getRegionsInfo() {
 // Function permettant d'afficher les cartes
 function drawRegionsMap(result) {
     // Initialisation des colonnes
-    var headers = [["Country", "New Cases"]];
+    var nameAttribute = document.getElementById("nameAttribute");
+    var attribute = nameAttribute.options[nameAttribute.selectedIndex].text;
+    var headers = [["Country", attribute]];
     
     // On ajoute chaque ligne de l'API dans une table de données
     for (let i = 0; i < result.length; i++) {
@@ -79,7 +82,6 @@ function drawRegionsMap(result) {
 document.getElementById("nameContinent").addEventListener("change", getMapsInfo());
 function getMapsInfo() {
     var map = document.getElementById("nameContinent").value;
-    
     // On vérifie que la map sélectionnée n'est pas celle de World
     if (map != 'World') {
         $.ajax({

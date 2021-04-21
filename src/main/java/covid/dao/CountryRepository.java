@@ -50,6 +50,9 @@ public interface CountryRepository extends JpaRepository<Country, String> {
             , nativeQuery = true)
     InfoContinent getInfosContinentByName(@Param("nameContinent") String nameContinent, @Param("date") LocalDate date);
    
+    ///////////////////////////////////////
+    // API GOOGLE GEOCHART //
+    ///////////////////////////////////////
     // Fonction permettant de récupérer les infos de World en fonction de la date
    @Query(value = "SELECT SUM(c.total_Cases) AS tcases, "
             + "SUM(c.total_Deaths) AS tdeaths, SUM(c.icu_Patients) AS icu, "

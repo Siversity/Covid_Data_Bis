@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(path = "/continents") 
+@RequestMapping(path = "/show") 
 public class ContinentController {
 
     @Autowired
