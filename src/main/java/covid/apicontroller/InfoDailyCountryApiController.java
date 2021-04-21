@@ -18,24 +18,45 @@ public class InfoDailyCountryApiController {
     InfoDailyCountryRepository infoDailyDAO;
 
     // API permettant d'afficher l'évolution des stats du Country en renvoyant une liste des infos journalières
-    @GetMapping(path = "country/stats", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(path = "country/totalstats", produces = {MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody
-    List<Object> getAllDailyStatsCountry(@RequestParam(required = true) final String nameCountry) {
-        return infoDailyDAO.getAllDailyStatsByCountry(nameCountry);
+    List<Object> getAllDailyTotalStatsCountry(@RequestParam(required = true) final String nameCountry) {
+        return infoDailyDAO.getAllDailyTotalStatsByCountry(nameCountry);
     }
 
     // API permettant d'afficher l'évolution des stats du Continent en renvoyant une liste des infos journalières
-    @GetMapping(path = "continent/stats", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(path = "continent/totalstats", produces = {MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody
-    List<Object> getAllDailyStatsContinent(@RequestParam(required = true) final String nameContinent) {
-        return infoDailyDAO.getAllDailyStatsByContinent(nameContinent);
+    List<Object> getAllDailyTotalStatsContinent(@RequestParam(required = true) final String nameContinent) {
+        return infoDailyDAO.getAllDailyTotalStatsByContinent(nameContinent);
     }
 
     // API permettant d'afficher l'évolution des stats de World en renvoyant une liste des infos journalières
-    @GetMapping(path = "world/stats", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "world/totalstats", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    List<Object> getAllDailyStatsWorld() {
-        return infoDailyDAO.getAllDailyStatsWorld();
+    List<Object> getAllDailyTotalStatsWorld() {
+        return infoDailyDAO.getAllDailyTotalStatsWorld();
+    }
+    
+    // API permettant d'afficher l'évolution des stats du Country en renvoyant une liste des infos journalières
+    @GetMapping(path = "country/newstats", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public @ResponseBody
+    List<Object> getAllDailyNewStatsCountry(@RequestParam(required = true) final String nameCountry) {
+        return infoDailyDAO.getAllDailyNewStatsByCountry(nameCountry);
+    }
+
+    // API permettant d'afficher l'évolution des stats du Continent en renvoyant une liste des infos journalières
+    @GetMapping(path = "continent/newstats", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public @ResponseBody
+    List<Object> getAllDailyStatsContinent(@RequestParam(required = true) final String nameContinent) {
+        return infoDailyDAO.getAllDailyNewStatsByContinent(nameContinent);
+    }
+
+    // API permettant d'afficher l'évolution des stats de World en renvoyant une liste des infos journalières
+    @GetMapping(path = "world/newstats", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    List<Object> getAllDailyNewStatsWorld() {
+        return infoDailyDAO.getAllDailyNewStatsWorld();
     }
 
 }

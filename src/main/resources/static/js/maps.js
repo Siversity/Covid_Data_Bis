@@ -22,7 +22,7 @@ function getMap(nameContinent) {
 function getRegionsInfo() {
     $.ajax({
         type: "GET",
-        url: "/api/country/continent",
+        url: "/api/country/newcases",
         dataType: "json",
         contentType: "application/json",
         success: drawRegionsMap,
@@ -47,7 +47,8 @@ function drawRegionsMap(result) {
         region: getMap(document.getElementById("nameContinent").value),
         enableRegionInteractivity: true,
         colorAxis: {colors: ['rgb(29, 66, 115)']},
-        backgroundColor: {colors: ['transparent']}};
+        backgroundColor: {colors: ['transparent']},
+        legend: 'New Cases'};
 
     // Pour chaque pays affiché, on ajoute un évènement afin de lire ses infos
     google.visualization.events.addListener(chart, 'select', function () {

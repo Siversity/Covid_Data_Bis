@@ -23,7 +23,7 @@ public class CountryApiController {
     private InfoDailyCountryRepository infoDailyDAO;
 
     // API utilisée par GeoChart Google rencoyant le nom d'un Country et le nombre de nouveaux cas récent
-    @GetMapping(path = "continent", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "newcases", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     List<Object> getNewCasesByContinent() {
         LocalDate today = LocalDate.now().minusDays(2);

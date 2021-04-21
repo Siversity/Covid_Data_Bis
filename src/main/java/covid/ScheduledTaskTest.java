@@ -102,6 +102,9 @@ public class ScheduledTaskTest {
                 }
                 oneData = csvrOWD.readNext();
             }
+            
+            System.out.println("AJOUT DES DONNES COMPLETE, ON CLOSE LE READER");
+            csvrOWD.close();
 
             // Stockage des données du fichier OWD
         } catch (Exception ex) {

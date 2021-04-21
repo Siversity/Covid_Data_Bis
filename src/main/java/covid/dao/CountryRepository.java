@@ -64,4 +64,16 @@ public interface CountryRepository extends JpaRepository<Country, String> {
             , nativeQuery = true)
     InfoWorld getInfosWorld(@Param("date") LocalDate date);
     
+    // Requête permettant de récupérer le nombre de cas totaux
+    @Query(value = "SELECT name_Country AS name, total_Deaths AS tdeaths "
+            + "FROM Country "
+            , nativeQuery = true)
+    List<Object> getTotalDeaths();
+    
+    // Requête permettant de récupérer le nombre de cas totaux
+    @Query(value = "SELECT name_Country AS name, total_Cases AS tcases "
+            + "FROM Country "
+            , nativeQuery = true)
+    List<Object> getTotalCases();
+    
 }
