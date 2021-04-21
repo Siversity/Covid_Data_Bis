@@ -42,15 +42,13 @@ public class CountryApiController {
     @GetMapping(path = "totalcases", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     List<Object> getTotalCases() {
-        LocalDate today = LocalDate.now().minusDays(2);
         return countryDAO.getTotalCases();
     }
     
     // API utilisée par GeoChart Google rencoyant le nom d'un Country et le nombre de nouveaux morts totaux
     @GetMapping(path = "totaldeaths", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    List<Object> geTotalDeaths() {
-        LocalDate today = LocalDate.now().minusDays(2);
+    List<Object> getTotalDeaths() {
         return countryDAO.getTotalDeaths();
     }
 
