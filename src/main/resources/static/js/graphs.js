@@ -147,8 +147,8 @@ function showTotalStatsMap(result) {
         title: document.getElementById("nameContinent").value + " Total Cases & Deaths",
         curveType: 'function',
         legend: {position: 'bottom'},
-                width: 800,
-                height: 500
+        width: 800,
+        height: 500
     };
     var chart = new google.visualization.LineChart(document.getElementById('tgraphe'));
 
@@ -174,8 +174,8 @@ function showNewStatsMap(result) {
         title: document.getElementById("nameContinent").value + " New Cases & Deaths",
         curveType: 'function',
         legend: {position: 'bottom'},
-                width: 800,
-                height: 500
+        width: 800,
+        height: 500
     };
     var chart = new google.visualization.LineChart(document.getElementById('ngraphe'));
 
