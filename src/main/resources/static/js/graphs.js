@@ -1,6 +1,5 @@
 // Lancemenet de l'API Google permettant de charger les graphes
 google.charts.load('current', {'packages': ['corechart']});
-
 // Fonction permettant de récupérer la liste des infos journalières d'un Country
 function getCountryTotalStats(country) {
     $.ajax({
@@ -15,7 +14,7 @@ function getCountryTotalStats(country) {
             dataTable.addColumn('date', 'Date');
             dataTable.addColumn('number', 'Total Cases');
             dataTable.addColumn('number', 'Total Deaths');
-            
+
             // Pour chaque ligne de l'API, on transforme les objets de la 1ère ligne en date
             for (let line of result) {
                 line[0] = new Date(line[0]);
@@ -25,10 +24,12 @@ function getCountryTotalStats(country) {
             var options = {
                 title: country + " Total Cases & Deaths",
                 curveType: 'function',
-                legend: {position: 'bottom'}
+                legend: {position: 'bottom'},
+                width: 800,
+                height: 500
             };
             var chart = new google.visualization.LineChart(document.getElementById('tgraphe'));
-            
+
             // On trace le graphe
             chart.draw(dataTable, options);
         },
@@ -50,7 +51,7 @@ function getCountryNewStats(country) {
             dataTable.addColumn('date', 'Date');
             dataTable.addColumn('number', 'New Cases');
             dataTable.addColumn('number', 'New Deaths');
-            
+
             // Pour chaque ligne de l'API, on transforme les objets de la 1ère ligne en date
             for (let line of result) {
                 line[0] = new Date(line[0]);
@@ -60,10 +61,12 @@ function getCountryNewStats(country) {
             var options = {
                 title: country + " New Cases & Deaths",
                 curveType: 'function',
-                legend: {position: 'bottom'}
+                legend: {position: 'bottom'},
+                width: 800,
+                height: 500
             };
             var chart = new google.visualization.LineChart(document.getElementById('ngraphe'));
-            
+
             // On trace le graphe
             chart.draw(dataTable, options);
         },
@@ -133,20 +136,22 @@ function showTotalStatsMap(result) {
     dataTable.addColumn('date', 'Date');
     dataTable.addColumn('number', 'Total Cases');
     dataTable.addColumn('number', 'Daily Cases');
-    
+
     // Pour chaque ligne de l'API, on transforme les objets de la 1ère ligne en date
     for (let line of result) {
         line[0] = new Date(line[0]);
     }
     dataTable.addRows(result);
-    
+
     var options = {
         title: document.getElementById("nameContinent").value + " Total Cases & Deaths",
         curveType: 'function',
-        legend: {position: 'bottom'}
+        legend: {position: 'bottom'},
+                width: 800,
+                height: 500
     };
     var chart = new google.visualization.LineChart(document.getElementById('tgraphe'));
-    
+
     // On trace le graphe
     chart.draw(dataTable, options);
 }
@@ -158,20 +163,22 @@ function showNewStatsMap(result) {
     dataTable.addColumn('date', 'Date');
     dataTable.addColumn('number', 'Total Cases');
     dataTable.addColumn('number', 'Daily Cases');
-    
+
     // Pour chaque ligne de l'API, on transforme les objets de la 1ère ligne en date
     for (let line of result) {
         line[0] = new Date(line[0]);
     }
     dataTable.addRows(result);
-    
+
     var options = {
         title: document.getElementById("nameContinent").value + " New Cases & Deaths",
         curveType: 'function',
-        legend: {position: 'bottom'}
+        legend: {position: 'bottom'},
+                width: 800,
+                height: 500
     };
     var chart = new google.visualization.LineChart(document.getElementById('ngraphe'));
-    
+
     // On trace le graphe
     chart.draw(dataTable, options);
 }
