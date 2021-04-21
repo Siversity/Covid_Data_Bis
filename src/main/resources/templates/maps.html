@@ -16,7 +16,7 @@
     <body>
         <div id="entete">
             <div id="divLogo">
-                <img type="image/png" th:src="@{/logo/logoCODBlanc.png}" src="../static/logo/logoCODBlanc.png" id="logoCOD">
+                <img type="image/png" th:src="@{/logo/logoCODBlanc.png}" src="../static/logo/logoCODBlanc.png" id="logoCODHaut">
             </div>
             <h1 id="titre">What's up about Covid ?</h1>
         </div>
@@ -91,6 +91,17 @@
         <p id="attention">Some data may not be filled in and are automatically replaced by "0".</p>
 
         <div id="graphe"></div>
+        <footer>
+            <div id='leTexte'>
+            <p>Cette application a été réalisée dans le cadre d'un projet tutoré par des étudiants de l'école d'ingénieur ISIS.</p>
+            <p>Par soucis de cohérences avec les données récupérées et pour une compréhension internationnale, nous avons choisi l'anglais comme langue de référence pour COD.</p> 
+            <p id="sources">Sources:</p>
+            <p>Our World in Data</p>
+            <p>Google</p>
+            <img type="image/png" th:src="@{/logo/logoCODBlanc.png}" src="../static/logo/logoCODBlanc.png" id="logoCOD">
+            <img type="image/png" th:src="@{/logo/logoISISBlanc.png}" src="../static/logo/logoISISBlanc.png"id="logoISIS">
+            </div>
+        </footer>
 
         <!-- Fichier JS avec Thymeleaf -->
         <script type="text/javascript" th:src="@{/js/graphs.js}" src="../static/js/graphs.js"></script>
