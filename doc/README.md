@@ -7,7 +7,7 @@ Vous obtenez ainsi la carte du monde. Dans le tableau sur la droite sont renseig
 graphiques montrant l'évolution des données. 
 
 En passant la souris sur la carte, vous obtiendrez le nom du pays sur lequel vous êtes, ainsi qu'une information. Cette information peut être changée en sélectionnant celle
-souhaitée dans "What ?". 
+souhaitée dans "Map Cursor". 
 
 Il est également possible de choisir la zone du monde que vous souhaitez afficher. Pour cela, sélectionnez la zone désirée dans "Where ?". La carte est ainsi modifiée et 
 apparaissent dans le tableau et sur les graphiques les données journalières correspondantes. 
