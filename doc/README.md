@@ -1,6 +1,5 @@
-# Covid_Data_Main
+# Instructions d'utilisation : 
 
-Instructions d'utilisation : 
 
 Vous arrivez sur la page d'accueil. Pour accéder aux cartes, cliquez sur "Data Access". 
 
