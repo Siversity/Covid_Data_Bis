@@ -108,7 +108,7 @@ a:active{
 #entete{
     justify-content: space-between;
     padding-right: 500px;
-    padding-left: 50px;
+    padding-left: 10px;
     padding-bottom: 70px;
     display:flex;
     margin-top: 0px;
@@ -153,7 +153,7 @@ a:active{
     padding: 5px;
     border-radius: 5px;
     margin-top: -550px;
-    margin-right: 90px;
+    margin-right: 20px;
     font-family: Hind Vadodara, sans-serif;
     font-size: 25px;
     color: rgba(21, 61, 119, 1);
