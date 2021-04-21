@@ -73,27 +73,10 @@ public class ScheduledTaskTest {
             CSVReader csvrOWD = new CSVReader(frOWD, ',');
 
             // Lecture du fichier OWD
-            // On initialise un tableau et une variable vide qui va contenir les élements lus par le Reader
-            // List<String[]> dataOWD = new ArrayList<String[]>();
             String[] oneData = csvrOWD.readNext();
             oneData = csvrOWD.readNext();
             // Si la ligne lue n'est pas vide
             while (oneData != null) {
-                
-                /*
-                int size = nextLine.length;
-                if (size == 0) {
-                    continue;
-                }
-                String debut = nextLine[0].trim();
-                if (debut.length() == 0 && size == 1) {
-                    continue;
-                }
-                if (debut.startsWith("#")) {
-                    continue;
-                }*/
-                //dataOWD.add(nextLine);
-                //or (String[] oneData : dataOWD) {
 
                 // Ajout des données
                 if (!((oneData[1] == null) || (oneData[1].length()) == 0)) {

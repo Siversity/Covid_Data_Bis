@@ -17,8 +17,6 @@ import covid.dto.InfoContinent;
 public class ContinentApiController {
 
     @Autowired
-    ContinentRepository continentDAO;
-    @Autowired
     CountryRepository countryDAO;
 
     // API renvoyant les infos d'un Continent

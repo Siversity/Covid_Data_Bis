@@ -17,13 +17,8 @@ import covid.dto.InfoWorld;
 public class WorldApiController {
 
     @Autowired
-    ContinentRepository continentDAO;
-    @Autowired
-    InfoDailyCountryRepository infoDailyDAO;
-    @Autowired
     CountryRepository countryDAO;
 
-    // -- Nouvel ajout
     @GetMapping(path = "getWorld", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     InfoWorld getInfosWorld() {
