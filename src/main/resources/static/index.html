@@ -7,14 +7,20 @@
     </head>
     <body>
     <div id="page">
-        <h1>Welcome to COD</h1>
+        <h1 id='welcome'>Welcome to COD</h1>
         <p id=presentation>Our application processes open data to offer you the latest figures about Covid 19.</p>
         <a href="continents/map" id="dataAccess" class="button" target="_self">Data Access</a>
     </div>
 
         <div id="basDePage">
-            <img src="" id="logoCOD">
-            <img src="" id="logoCOD">
+            <div id="divLogoCOD">
+                <img type="image/png" th:src="@{/logo/logoCODBlanc.png}" src="../static/logo/logoCODBlanc.png" id="logoCOD">
+            </div>
+            <div id="divLogoISIS">
+                <img type="image/png" th:src="@{/logo/logoISISBlanc.png}" src="../static/logo/logoISISlanc.png" id="logoISIS">
+            </div>
+            <p id="textBas">Cette application a été réalisée dans le cadre d'un projet tutoré par des étudiants de l'école d'ingénieur ISIS.</p>
+            <li id='sources'></li>
         </div>
     </body>
 </html>

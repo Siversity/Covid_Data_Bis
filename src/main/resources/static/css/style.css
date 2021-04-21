@@ -13,14 +13,9 @@ body{
 	width: 500px;
 }
 
-.h1{
+#presentation, #welcome{
 	margin-right: 50%;
-	font: rgb(255,255,255);
-}
-
-#presentation{
-	margin-right: 50%;
-	font: rgb(255,255,255);
+	color: rgb(255,255,255);
 }
 
 #dataAccess{
