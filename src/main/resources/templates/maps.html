@@ -27,7 +27,7 @@
             <a href="#graphe" id="nivGraphe">Graph</a>
             <form id="formulaireContinent">
             <label for="nameContinent">Where ?</label><br>
-            <select  class="selectpicker" data-style="btn-primary" id="nameContinent" name="nameContinent" onchange="getRegionsInfo(); getMapsInfo(); getAreaStats()">
+            <select  class="selectpicker" data-style="btn-primary" id="nameContinent" name="nameContinent" onchange="getRegionsInfo(); getMapsInfo(); getAreaTotalStats(); getAreaNewStats()">
                 <option value="World" selected="selected">World</option>
                 <option th:each="c: ${continents}" th:value='${c.nameContinent}' value="1" th:text="${c.nameContinent}">
                     Selected map
@@ -35,7 +35,7 @@
             </select>
             <br>
             <label for="nameAttribute">What ?</label><br>
-            <select  class="selectpicker" data-style="btn-primary" id="nameAttribute" name="nameAttribute" onchange="getRegionsInfo(); getMapsInfo(); getAreaStats()">
+            <select  class="selectpicker" data-style="btn-primary" id="nameAttribute" name="nameAttribute" onchange="getRegionsInfo(); getMapsInfo(); getAreaTotalStats(); getAreaNewStats()">
                 <option id="newcases" value="newcases" selected="selected">New Cases</option>
                 <option id="totalcases" value="newcases">Total Cases</option>
                 <option id="newdeaths" value="newdeaths">New Deaths</option>
@@ -98,7 +98,8 @@
 
         <p id="attention">Some data may not be filled in and are automatically replaced by "0".</p>
 
-        <div id="graphe"></div>
+        <div id="tgraphe"></div>
+        <div id="ngraphe"></div>
         <footer>
             <div id='leTexte'>
             <p>Cette application a été réalisée dans le cadre d'un projet tutoré par des étudiants de l'école d'ingénieur ISIS.</p>

@@ -58,7 +58,8 @@ function drawRegionsMap(result) {
         var selectedItem = chart.getSelection()[0];
         if (selectedItem) {
             var country = dataTable.getValue(selectedItem.row, 0);
-            getCountryStats(country);
+            getCountryNewStats(country);
+            getCountryTotalStats(country);
             $.ajax({
                 type: "GET",
                 url: "/api/country/getCountry?nameCountry=" + country,
