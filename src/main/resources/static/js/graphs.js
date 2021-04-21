@@ -25,8 +25,8 @@ function getCountryTotalStats(country) {
                 title: country + " Total Cases & Deaths",
                 curveType: 'function',
                 legend: {position: 'bottom'},
-                width: 800,
-                height: 500
+                width: 550,
+                height: 400
             };
             var chart = new google.visualization.LineChart(document.getElementById('tgraphe'));
 
@@ -62,8 +62,8 @@ function getCountryNewStats(country) {
                 title: country + " New Cases & Deaths",
                 curveType: 'function',
                 legend: {position: 'bottom'},
-                width: 800,
-                height: 500
+                width: 550,
+                height: 400
             };
             var chart = new google.visualization.LineChart(document.getElementById('ngraphe'));
 
@@ -147,8 +147,8 @@ function showTotalStatsMap(result) {
         title: document.getElementById("nameContinent").value + " Total Cases & Deaths",
         curveType: 'function',
         legend: {position: 'bottom'},
-        width: 800,
-        height: 500
+        width: 550,
+        height: 400
     };
     var chart = new google.visualization.LineChart(document.getElementById('tgraphe'));
 
@@ -174,8 +174,8 @@ function showNewStatsMap(result) {
         title: document.getElementById("nameContinent").value + " New Cases & Deaths",
         curveType: 'function',
         legend: {position: 'bottom'},
-        width: 800,
-        height: 500
+        width: 550,
+        height: 400
     };
     var chart = new google.visualization.LineChart(document.getElementById('ngraphe'));
 

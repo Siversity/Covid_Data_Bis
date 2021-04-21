@@ -26,23 +26,24 @@
             <a href="#region_div" id="nivCarte">Map</a>
             <a href="#graphe" id="nivGraphe">Graph</a>
             <form id="formulaireContinent">
-            <label for="nameContinent">Where ?</label><br>
-            <select  class="selectpicker" data-style="btn-primary" id="nameContinent" name="nameContinent" onchange="getRegionsInfo(); getMapsInfo(); getAreaTotalStats(); getAreaNewStats()">
-                <option value="World" selected="selected">World</option>
-                <option th:each="c: ${continents}" th:value='${c.nameContinent}' value="1" th:text="${c.nameContinent}">
-                    Selected map
-                </option>
-            </select>
-            <br>
-            <label for="nameAttribute">What ?</label><br>
-            <select  class="selectpicker" data-style="btn-primary" id="nameAttribute" name="nameAttribute" onchange="getRegionsInfo(); getMapsInfo(); getAreaTotalStats(); getAreaNewStats()">
-                <option id="newcases" value="newcases" selected="selected">New Cases</option>
-                <option id="totalcases" value="totalcases">Total Cases</option>
-                <option id="newdeaths" value="newdeaths">New Deaths</option>
-                <option id="totaldeaths" value="totaldeaths">Total Deaths</option>
-            </select>
-        </form>
-        <br/>
+                
+                <br>
+                <label for="nameAttribute">Map Cursor</label><br>
+                <select  class="selectpicker" data-style="btn-primary" id="nameAttribute" name="nameAttribute" onchange="getRegionsInfo(); getMapsInfo(); getAreaTotalStats(); getAreaNewStats()">
+                    <option id="newcases" value="newcases" selected="selected">New Cases</option>
+                    <option id="totalcases" value="totalcases">Total Cases</option>
+                    <option id="newdeaths" value="newdeaths">New Deaths</option>
+                    <option id="totaldeaths" value="totaldeaths">Total Deaths</option> 
+                </select>
+                 <label for="nameContinent">Where ?</label><br>
+                 <select  class="selectpicker" data-style="btn-primary" id="nameContinent" name="nameContinent" onchange="getRegionsInfo(); getMapsInfo(); getAreaTotalStats(); getAreaNewStats()">
+                        <option value="World" selected="selected">World</option>
+                        <option th:each="c: ${continents}" th:value='${c.nameContinent}' value="1" th:text="${c.nameContinent}">
+                            Selected map
+                        </option>
+                    </select>
+            </form>
+            <br/>
         </div>
 
         <div id="region_div"></div>
@@ -97,25 +98,26 @@
         </div>
 
         <p id="attention">Some data may not be filled in and are automatically replaced by "0".</p>
-
-        <div id="tgraphe"></div>
-        <div id="ngraphe"></div>
+        <div id="graphe">
+            <div id="tgraphe"></div>
+            <div id="ngraphe"></div>
+        </div>
         <footer>
             <div id='leTexte'>
-            <p>Cette application a été réalisée dans le cadre d'un projet tutoré par des étudiants de l'école d'ingénieur ISIS.</p>
-            <p>Par soucis de cohérences avec les données récupérées et pour une compréhension internationnale, nous avons choisi l'anglais comme langue de référence pour COD.</p> 
-            <p id="sources">Sources:</p>
-            <p>Our World in Data</p>
-            <p>Google</p>
-            <img type="image/png" th:src="@{/logo/logoCODBlanc.png}" src="../static/logo/logoCODBlanc.png" id="logoCOD">
-            <img type="image/png" th:src="@{/logo/logoISISBlanc.png}" src="../static/logo/logoISISBlanc.png"id="logoISIS">
+                <p>Cette application a été réalisée dans le cadre d'un projet tutoré par des étudiants de l'école d'ingénieur ISIS.</p>
+                <p>Par soucis de cohérences avec les données récupérées et pour une compréhension internationnale, nous avons choisi l'anglais comme langue de référence pour COD.</p> 
+                <p id="sources">Sources:</p>
+                <p>Our World in Data</p>
+                <p>Google</p>
+                <img type="image/png" th:src="@{/logo/logoCODBlanc.png}" src="../static/logo/logoCODBlanc.png" id="logoCOD">
+                <img type="image/png" th:src="@{/logo/logoISISBlanc.png}" src="../static/logo/logoISISBlanc.png"id="logoISIS">
             </div>
         </footer>
 
         <!-- Fichier JS avec Thymeleaf -->
         <script type="text/javascript" th:src="@{/js/graphs.js}" src="../static/js/graphs.js"></script>
         <script type="text/javascript" th:src="@{/js/maps.js}" src="../static/js/maps.js"></script>
-        
+
 
     </body>
 </html>
