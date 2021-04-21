@@ -8,6 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface InfoDailyCountryRepository extends JpaRepository<InfoDailyCountry, Integer> {
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // GETTEUR ID VIA DATE ET CODE COUNTRY //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Requête permettant de récupérer l'ID à partir de la date et du codeCountry
     @Query(value = "SELECT Id_Info_Country AS id FROM Info_Daily_Country "
@@ -16,6 +20,10 @@ public interface InfoDailyCountryRepository extends JpaRepository<InfoDailyCount
             nativeQuery = true)
     Integer getIdInfoCountryByCountryInformedCodeCountryAndDate(@Param("codeCountry") String codeCountry, @Param("date") LocalDate date);
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // AFFICHAGE NEW CASES & DEATHS : GEO CHART //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     // Requête permettant de récupérer le nombre de nouveaux cas en fonction de la date
     @Query(value = "SELECT Country.name_Country AS name, Info_Daily_Country.new_Cases AS ncases "
             + "FROM Info_Daily_Country "
@@ -33,6 +41,10 @@ public interface InfoDailyCountryRepository extends JpaRepository<InfoDailyCount
             + "WHERE Info_Daily_Country.date = :date ",
             nativeQuery = true)
     List<Object> getNewDeaths(@Param("date") LocalDate date);
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // AFFICHAGE INFOS TOTAL CASES & DEATHS : LINE CHART //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Requête permettant de récupérer les données journalières d'un Country
     @Query(value = "SELECT date, Info_Daily_Country.total_Cases AS tcases, Info_Daily_Country.total_Deaths AS tdeaths "
@@ -64,6 +76,10 @@ public interface InfoDailyCountryRepository extends JpaRepository<InfoDailyCount
             + "ORDER BY date ",
             nativeQuery = true)
     List<Object> getAllDailyTotalStatsWorld();
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // AFFICHAGE INFOS NEW CASES & DEATHS : LINE CHART //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
     
     // Requête permettant de récupérer les données journalières d'un Country
     @Query(value = "SELECT date, Info_Daily_Country.new_Cases AS ncases, Info_Daily_Country.new_Deaths AS ndeaths "

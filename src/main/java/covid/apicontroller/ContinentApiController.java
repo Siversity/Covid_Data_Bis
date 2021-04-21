@@ -1,6 +1,5 @@
 package covid.apicontroller;
 
-import covid.dao.ContinentRepository;
 import covid.dao.CountryRepository;
 import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,15 @@ import covid.dto.InfoContinent;
 @RequestMapping(path = "/api/continent")
 public class ContinentApiController {
 
+    // DAO
     @Autowired
     CountryRepository countryDAO;
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // AFFICHAGE INFOS CLASSIQUES : AJAX //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // API renvoyant les infos actualisées d'un Continent
+    // API renvoyant les infos actualisées à afficher d'un Continent
     @GetMapping(path = "getContinent", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     InfoContinent getInfosContinent(@RequestParam(required = true) final String nameContinent) {

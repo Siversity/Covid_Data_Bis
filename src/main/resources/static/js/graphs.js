@@ -1,6 +1,11 @@
 // Lancemenet de l'API Google permettant de charger les graphes
 google.charts.load('current', {'packages': ['corechart']});
-// Fonction permettant de récupérer la liste des infos journalières d'un Country
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// AFFICHAGE DES COUNTRY : LINE CHART //
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Fonction permettant de récupérer la liste des infos totales d'un Country
 function getCountryTotalStats(country) {
     $.ajax({
         type: "GET",
@@ -37,7 +42,7 @@ function getCountryTotalStats(country) {
     });
 }
 
-// Fonction permettant de récupérer la liste des infos journalières d'un Country
+// Fonction permettant de récupérer la liste des nouvelles infos d'un Country
 function getCountryNewStats(country) {
     $.ajax({
         type: "GET",
@@ -74,10 +79,15 @@ function getCountryNewStats(country) {
     });
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// AFFICHAGE DES MAPS : LINE CHART //
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Evènement permettant de récupérer et détecter la map sélectionnée
 document.getElementById("nameContinent").addEventListener("change", getAreaTotalStats());
 document.getElementById("nameContinent").addEventListener("change", getAreaNewStats());
-// Fonction permettant de récupérer les infos journalières d'une map
+
+// Fonction permettant de récupérer les infos totales d'une map
 function getAreaTotalStats() {
     var map = document.getElementById("nameContinent").value;
 
@@ -103,33 +113,7 @@ function getAreaTotalStats() {
     }
 }
 
-// Fonction permettant de récupérer les infos journalières d'une map
-function getAreaNewStats() {
-    var map = document.getElementById("nameContinent").value;
-    var attribute = document.getElementById("nameAttribute");
-    // On détecte si la map sélectionnée est World
-    if (map != 'World') {
-        $.ajax({
-            type: "GET",
-            url: "/api/infoDaily/continent/newstats?nameContinent=" + map,
-            dataType: "json",
-            contentType: "application/json",
-            success: showNewStatsMap,
-            error: showError
-        });
-    } else {
-        $.ajax({
-            type: "GET",
-            url: "/api/infoDaily/world/newstats",
-            dataType: "json",
-            contentType: "application/json",
-            success: showNewStatsMap,
-            error: showError
-        });
-    }
-}
-
-// Fonction permettant de tracer les graphes d'une map
+// Fonction permettant de tracer les graphes d'une map ç partir des infos totales
 function showTotalStatsMap(result) {
     // On initialise le tableau de données ainsi que les colonnes
     var dataTable = new google.visualization.DataTable();
@@ -156,7 +140,33 @@ function showTotalStatsMap(result) {
     chart.draw(dataTable, options);
 }
 
-// Fonction permettant de tracer les graphes d'une map
+// Fonction permettant de récupérer les nouvelles infos d'une map
+function getAreaNewStats() {
+    var map = document.getElementById("nameContinent").value;
+    var attribute = document.getElementById("nameAttribute");
+    // On détecte si la map sélectionnée est World
+    if (map != 'World') {
+        $.ajax({
+            type: "GET",
+            url: "/api/infoDaily/continent/newstats?nameContinent=" + map,
+            dataType: "json",
+            contentType: "application/json",
+            success: showNewStatsMap,
+            error: showError
+        });
+    } else {
+        $.ajax({
+            type: "GET",
+            url: "/api/infoDaily/world/newstats",
+            dataType: "json",
+            contentType: "application/json",
+            success: showNewStatsMap,
+            error: showError
+        });
+    }
+}
+
+// Fonction permettant de tracer les graphes d'une map à partir des nouvelles infos
 function showNewStatsMap(result) {
     // On initialise le tableau de données ainsi que les colonnes
     var dataTable = new google.visualization.DataTable();
@@ -182,6 +192,10 @@ function showNewStatsMap(result) {
     // On trace le graphe
     chart.draw(dataTable, options);
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// ERREUR AJAX //
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Fonction qui traite les erreurs de la requête
 function showError(xhr, status, message) {

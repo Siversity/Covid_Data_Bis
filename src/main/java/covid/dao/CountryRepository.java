@@ -14,12 +14,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CountryRepository extends JpaRepository<Country, String> {
 
-    // Requête permettant de récupérer la liste des Country en fonction de leur Continent
-    @Query(value = "SELECT name_Country AS name, total_Cases AS cases "
-            + "FROM Country "
-            + "WHERE Continent_Name_Continent LIKE %:nameContinent% "
-            , nativeQuery = true)
-    List<Object> getCountriesByContinent(@Param("nameContinent") String nameContinent);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // AFFICHAGE INFOS CLASSIQUES : AJAX //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
     
     // Requête permettant de récupérer les infos d'un Country en fonction de la date
     @Query(value = "SELECT c.code_Country AS code, c.name_Country AS name, c.total_Cases AS tcases, c.total_Deaths AS tdeaths, "
@@ -50,9 +47,6 @@ public interface CountryRepository extends JpaRepository<Country, String> {
             , nativeQuery = true)
     InfoContinent getInfosContinentByName(@Param("nameContinent") String nameContinent, @Param("date") LocalDate date);
    
-    ///////////////////////////////////////
-    // API GOOGLE GEOCHART //
-    ///////////////////////////////////////
     // Fonction permettant de récupérer les infos de World en fonction de la date
    @Query(value = "SELECT SUM(c.total_Cases) AS tcases, "
             + "SUM(c.total_Deaths) AS tdeaths, SUM(c.icu_Patients) AS icu, "
@@ -66,6 +60,10 @@ public interface CountryRepository extends JpaRepository<Country, String> {
             + "WHERE i.date = :date "
             , nativeQuery = true)
     InfoWorld getInfosWorld(@Param("date") LocalDate date);
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // AFFICHAGE TOTAL CASES & DEATHS : GEO CHART //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
     
     // Requête permettant de récupérer le nombre de cas totaux
     @Query(value = "SELECT name_Country AS name, total_Deaths AS tdeaths "

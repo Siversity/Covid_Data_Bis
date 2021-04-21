@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(path = "/api/infoDaily")
 public class InfoDailyCountryApiController {
 
+    // DAO
     @Autowired
     InfoDailyCountryRepository infoDailyDAO;
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // AFFICHAGE INFOS TOTAL CASES & DEATHS : LINE CHART//
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // API permettant d'afficher l'évolution des stats du Country en renvoyant une liste des infos journalières
     @GetMapping(path = "country/totalstats", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -37,6 +42,10 @@ public class InfoDailyCountryApiController {
     List<Object> getAllDailyTotalStatsWorld() {
         return infoDailyDAO.getAllDailyTotalStatsWorld();
     }
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // AFFICHAGE INFOS NEW CASES & DEATHS : LINE CHART //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
     
     // API permettant d'afficher l'évolution des stats du Country en renvoyant une liste des infos journalières
     @GetMapping(path = "country/newstats", produces = {MediaType.APPLICATION_JSON_VALUE})

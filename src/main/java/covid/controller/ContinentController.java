@@ -11,9 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(path = "/show") 
 public class ContinentController {
 
+    // DAO
     @Autowired
     ContinentRepository continentDAO;
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // AFFICHAGE MAPS //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // Fonction permettant d'afficher la page HTML affichant les maps
     @GetMapping(path = "map")
     public String showContinentList(Model model) {
         model.addAttribute("continents", continentDAO.findAll());

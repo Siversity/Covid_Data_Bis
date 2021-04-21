@@ -7,16 +7,10 @@ google.charts.load('current', {'packages': ['geochart'], 'mapsApiKey': 'AIzaSyD-
 // On fait l'appel AJAX dès le chargement de la page
 google.charts.setOnLoadCallback(getRegionsInfo);
 
-// Fonction qui retourne la carte associée au nom du continent
-function getMap(nameContinent) {
-    for (let mapContinent of mapIdContinents) {
-        if (nameContinent == mapContinent[0]) {
-            return mapContinent[1]
-        }
-    }
-    return ['World', 'world'];
-}
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// AFFICHAGE DES MAPS //
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Requête AJAX qui récupère les données à afficher
 function getRegionsInfo() {
@@ -31,7 +25,7 @@ function getRegionsInfo() {
     });
 }
 
-// Function permettant d'afficher les cartes
+// Function permettant d'afficher les Maps
 function drawRegionsMap(result) {
     // Initialisation des colonnes
     var nameAttribute = document.getElementById("nameAttribute");
@@ -76,10 +70,35 @@ function drawRegionsMap(result) {
     chart.draw(dataTable, options);
 }
 
+// Fonction qui permet de déterminer quelle Map à afficher en fonction de la table de correspondance des Maps
+function getMap(nameContinent) {
+    for (let mapContinent of mapIdContinents) {
+        if (nameContinent == mapContinent[0]) {
+            return mapContinent[1]
+        }
+    }
+    return ['World', 'world'];
+}
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// AFFICHAGE DES INFOS DANS LE TABLEAU //
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Fonction permettant d'afficher les infos d'un Country
+function showInfoCountry(result) {
+    // On rend le tableau visible
+    var table = document.getElementById("tableInfo");
+    table.style.display = "initial";
+    
+    // On met en titre du tableau le nom du Country
+    var country = document.getElementById("title");
+    country.innerHTML = result.name;
+    
+    // On affiche les infos
+    showInfo(result);
+}
 
-// Fonction permettant d'afficher les infos des continents quand on sélectionne leur map
+// Fonction de déterminer quelle map est sélectionnée
 document.getElementById("nameContinent").addEventListener("change", getMapsInfo());
 function getMapsInfo() {
     var map = document.getElementById("nameContinent").value;
@@ -105,20 +124,7 @@ function getMapsInfo() {
     }
 }
 
-// Fonction permettant d'afficher les infos d'un Country
-function showInfoCountry(result) {
-    // On rend le tableau visible
-    var table = document.getElementById("tableInfo");
-    table.style.display = "initial";
-    
-    // On met en titre du tableau le nom du Country
-    var country = document.getElementById("title");
-    country.innerHTML = result.name;
-    
-    // On affiche les infos
-    showInfo(result);
-}
-
+// Fonction permettant d'afficher les infos d'une Map
 function showInfoMap(result) {
     // On rend le tableau visible
     var table = document.getElementById("tableInfo");
@@ -157,6 +163,10 @@ function showInfo(result) {
     newVaccinations.innerHTML = result.nvaccinations.toLocaleString();
 
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// ERREUR AJAX //
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Fonction qui traite les erreurs de la requête
 function showError(xhr, status, message) {

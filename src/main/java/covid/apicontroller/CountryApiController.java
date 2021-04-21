@@ -17,10 +17,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(path = "/api/country")
 public class CountryApiController {
 
+    // DAO
     @Autowired
     private CountryRepository countryDAO;
     @Autowired
     private InfoDailyCountryRepository infoDailyDAO;
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // AFFICHAGE INFOS NEW CASES & DEATHS : GEO CHART //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // API utilisée par GeoChart Google rencoyant le nom d'un Country et le nombre de nouveaux cas récent
     @GetMapping(path = "newcases", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -38,6 +43,10 @@ public class CountryApiController {
         return infoDailyDAO.getNewDeaths(today);
     }
     
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // AFFICHAGE TOTAL CASES & DEATHS : GEOCHART //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     // API utilisée par GeoChart Google rencoyant le nom d'un Country et le nombre de nouveaux cas totaux
     @GetMapping(path = "totalcases", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
@@ -51,6 +60,10 @@ public class CountryApiController {
     List<Object> getTotalDeaths() {
         return countryDAO.getTotalDeaths();
     }
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // AFFICHAGE INFOS CLASSIQUES : AJAX //
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // API utilisée pour afficher les infos actualisées d'un Country
     @GetMapping(path = "getCountry", produces = {MediaType.APPLICATION_JSON_VALUE})
